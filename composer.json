@@ -1,0 +1,17 @@
+{
+  "name": "lois/328/QuizForge",
+  "description": "My quiz application",
+  "authors": [
+    {
+      "name": "Lois Lanctot",
+      "email": "lanctot.lois@student.greenriver.edu"
+    },
+    {
+      "name": "Noah Lanctot",
+      "email": "lanctot.noah@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
