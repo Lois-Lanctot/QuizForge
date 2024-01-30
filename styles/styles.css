@@ -1,0 +1,32 @@
+.img-logo {
+    width: 7%;
+}
+
+header {
+    background-color: #4B4237;
+}
+
+
+body {
+    width: 100%;
+    background: url("../images/chocolate_donut.jpeg") no-repeat fixed center center;
+    background-size: cover;
+}
+
+nav {
+    background-color: #363028;
+}
+
+.box {
+    margin: 50px;
+}
+
+#box1 {
+    background-color: pink;
+}
+#box2 {
+    background-color: yellow;
+}
+#box3 {
+    background-color: lightblue;
+}
