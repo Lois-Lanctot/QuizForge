@@ -19,14 +19,21 @@ nav {
 
 .box {
     margin: 50px;
+    padding: 100px;
 }
 
 #box1 {
-    background-color: pink;
+    background-color: #f7e1d7;
 }
 #box2 {
-    background-color: yellow;
+    background-color: #edafb8;
 }
 #box3 {
-    background-color: lightblue;
+    background-color: #f7e1d7;
+}
+
+#color-box {
+    margin: 100px 50px;
+    margin-top: 150px;
+    color: white;
 }
