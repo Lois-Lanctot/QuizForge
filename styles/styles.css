@@ -33,7 +33,15 @@ nav {
 }
 
 #color-box {
-    margin: 100px 50px;
-    margin-top: 150px;
+    margin: 150px 50px 100px;
     color: white;
+}
+
+h1 {
+    font-family: Luminari, fantasy;
+}
+
+
+#arrow-img {
+    width: 10%;
 }
