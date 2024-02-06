@@ -1,11 +1,10 @@
 .img-logo {
-    width: 7%;
+    width: 120px;
 }
 
 header {
     background-color: #4B4237;
 }
-
 
 body {
     width: 100%;
@@ -13,21 +12,24 @@ body {
     background-size: cover;
 }
 
-nav {
+.navbar {
     background-color: #363028;
 }
 
 .box {
-    margin: 50px;
     padding: 100px;
+    margin: 20px;
+    text-align: center;
 }
 
 #box1 {
     background-color: #f7e1d7;
 }
+
 #box2 {
     background-color: #edafb8;
 }
+
 #box3 {
     background-color: #f7e1d7;
 }
@@ -41,7 +43,6 @@ h1 {
     font-family: Luminari, fantasy;
 }
 
-
 #arrow-img {
-    width: 10%;
+    width: 30px;
 }
