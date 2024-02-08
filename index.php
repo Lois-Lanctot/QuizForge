@@ -3,7 +3,7 @@
  * Lois Lanctot, Noah Lanctot
  * February 2024
  * https://lois.greenriverdev.com/328/QuizForge/
- * This is my CONTROLLER for the QuizForge app
+ * This is our CONTROLLER for the QuizForge app
  */
 
 //Turn on error reporting
