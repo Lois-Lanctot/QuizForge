@@ -46,3 +46,35 @@ h1 {
 #arrow-img {
     width: 30px;
 }
+
+.create-personality {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 2%;
+    background-color: #f7e1d7;
+}
+
+.create-trivia {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 2%;
+    background-color: #edafb8;
+}
+
+.personality {
+    background-color: #edafb8;
+}
+
+
+.trivia {
+    background-color: #f7e1d7;
+}
+
+
+button {
+    width: 100%;
+    margin-top: 5%;
+    border: none;
+}
+
+
