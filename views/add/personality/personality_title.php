@@ -1,7 +1,7 @@
 <!--
     Authors: Noah Lanctot, Lois Lanctot
-    File: trivia_title.html
-    Description: Create a trivia quiz
+    File: personality_title.php
+    Description: Create a personality quiz
 -->
 
 <!DOCTYPE html>
@@ -28,14 +28,13 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="create">
-            <h1>Create Trivia Quiz</h1><hr>
+            <h1>Create Personality Quiz</h1><hr>
 
-            <!-- Trivia Quiz Form -->
+            <!-- Personality Quiz Form -->
             <form action="#" method="post">
                 <div class="row">
-
                     <div class="form-group col-4">
-                        <!-- Quiz title -->
+                        <!-- Quiz Title -->
                         <div class="form-group">
                             <label for="title" class="bold col-sm-4 control-label">Quiz Title</label>
                             <input class="form-control" type="text" name="title" id="title" value="">

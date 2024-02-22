@@ -1,6 +1,6 @@
 <!--
     Authors: Noah Lanctot, Lois Lanctot
-    File: choice.html
+    File: choice.php
     Description: Choose a quiz to create
 -->
 
