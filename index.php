@@ -11,10 +11,6 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
 // Require the autoload file
-<<<<<<< HEAD
-require_once 'vendor/autoload.php';
-require_once 'controllers/quizController.php';
-=======
 require_once ('vendor/autoload.php');
 require_once ('model/data-layer.php');
 require_once ('model/validate.php');
@@ -35,8 +31,6 @@ catch (PDOException $e) {
     echo $e->getMessage(); #temporary
 }
 
-
->>>>>>> 8391ac603e5f6699be87f5585c6db24308a2ded2
 
 // Instantiate F3
 $f3 = Base::instance();
