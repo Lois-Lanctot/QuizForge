@@ -17,6 +17,9 @@ require_once 'controllers/quizController.php';
 // Instantiate F3
 $f3 = Base::instance();
 
+// Instantiate the Controller
+$controller = new QuizController($f3);
+
 // Define routes using the controller functions
 $f3->route('GET /', 'QuizController->home');
 $f3->route('GET /addChoice', 'QuizController->addChoice');
