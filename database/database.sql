@@ -1,3 +1,6 @@
+-- Drop all Tables
+DROP TABLE IF EXISTS quiz, questions, `options`, results;
+
 -- Create the 'quiz' table
 CREATE TABLE quiz (
     id INT PRIMARY KEY,
