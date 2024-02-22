@@ -42,8 +42,12 @@ class QuizController
             if (empty($this->_f3->get('errors'))) {
                 // If there are no errors
 
+                //instantiate DataLayer object
+                $data_layer = new QuizDataLayer();
+
                 // Send title and desc to data-layer to add data to the database
-                addQuiz($_POST['title'], $_POST['desc']);
+                $data_layer->setQuizTitle($_POST['title']);
+                $data_layer->setQuizDesc($_POST['desc']);
 
                 $this->_f3->reroute('/addChoice');
             }
@@ -73,6 +77,9 @@ class QuizController
 
             if (empty($this->_f3->get('errors'))) {
                 // If there are no errors
+
+                // Instantiate DataLayer object
+                $data_layer = new DataLayer();
 
                 // Send title and desc to data-layer to add data to the database
                 addQuiz($_POST['title'], $_POST['desc']);

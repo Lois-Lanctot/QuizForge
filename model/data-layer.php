@@ -20,7 +20,7 @@ class QuizDataLayer {
      * @param $_quiz_desc
      * @param $_questions
      */
-    public function __construct(PDO $dbh)
+    function __construct()
     {
         try {
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -37,7 +37,7 @@ class QuizDataLayer {
     /**
      * @param string $quiz_title
      */
-    public function setQuizTitle($quiz_title)
+    function setQuizTitle($quiz_title)
     {
         $this->_quiz_title = $quiz_title;
     }
@@ -45,7 +45,7 @@ class QuizDataLayer {
     /**
      * @param string $quiz_desc
      */
-    public function setQuizDesc($quiz_desc)
+    function setQuizDesc($quiz_desc)
     {
         $this->_quiz_desc = $quiz_desc;
     }
@@ -74,7 +74,7 @@ class QuizDataLayer {
      * @param string $title question title
      * @param mixed $options associative array of option names and results
      */
-    public function setQuestions($title, $options)
+    function setQuestions($title, $options)
     {
         // Create a new associative array for the questions
         $this->_questions = [
