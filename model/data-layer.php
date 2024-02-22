@@ -94,7 +94,7 @@ class QuizDataLayer {
 
 
 
-    function addQuiz($title, $desc) {
+    function addTriviaQuiz($title, $desc, $tOrP) {
         // the method also generates a unique key and saves it to an array in data-layer
 
         //  you'll eventually send the array to the getTriviaQuiz page method
@@ -105,6 +105,8 @@ class QuizDataLayer {
 
         //check if any of the fields are blank, if they are you can't add the Quiz
         //if there's stuff in the variables, add a new quiz to the database
+        // check if the quiz is a trivia or personality quiz using the variable: tOrP (so ugly, sorry)
 
     }
+
 }
