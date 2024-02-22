@@ -19,6 +19,7 @@ require_once ('model/validate.php');
 echo $_SERVER['DOCUMENT_ROOT'];
 require ($_SERVER['DOCUMENT_ROOT'].'/../config.php');
 
+
 try {
     //instantiate a PDO database connection object
     $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
