@@ -38,14 +38,13 @@ class QuizController
                 $this->_f3->set('errors["quiz_desc"]', "Invalid Quiz Description");
             }
 
-            // Connect to the database
-            $dbh = connectToDB();
-
-            // Send title and desc to data-layer to add data to the database
-            addQuiz($_POST['title'], $_POST['desc']);
 
             if (empty($this->_f3->get('errors'))) {
-                // If there are no errors, reroute
+                // If there are no errors
+
+                // Send title and desc to data-layer to add data to the database
+                addQuiz($_POST['title'], $_POST['desc']);
+
                 $this->_f3->reroute('/addChoice');
             }
         }
@@ -69,14 +68,15 @@ class QuizController
                 $this->_f3->set('errors["quiz_desc"]', "Invalid Quiz Description");
             }
 
-            // Connect to the database
-            $dbh = connectToDB();
 
-            // Send title and desc to data-layer to add data to the database
-            addQuiz($_POST['title'], $_POST['desc']);
+
 
             if (empty($this->_f3->get('errors'))) {
-                // If there are no errors, reroute
+                // If there are no errors
+
+                // Send title and desc to data-layer to add data to the database
+                addQuiz($_POST['title'], $_POST['desc']);
+
                 $this->_f3->reroute('/addChoice');
             }
         }
