@@ -49,7 +49,7 @@ class QuizController
                 $data_layer->setQuizTitle($_POST['title']);
                 $data_layer->setQuizDesc($_POST['desc']);
 
-                $this->_f3->reroute('/addChoice');
+                $this->_f3->reroute('/addTriviaQuestions');
             }
         }
 
@@ -57,6 +57,37 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_title.php');
     }
+
+
+
+    function addTriviaQuestions()
+    {
+        // Handle POST request to add personality title
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // TODO: Validate questions
+
+
+            if (empty($this->_f3->get('errors'))) {
+                // If there are no errors
+
+                // Instantiate DataLayer object
+                $data_layer = new QuizDataLayer();
+
+                // TODO: prepare questions to be sent to the data-layer to set questions
+
+
+                // set questions
+                $data_layer->setQuestions($_POST['question']);
+
+                $this->_f3->reroute('/addChoice');
+            }
+        }
+
+        // Display the add personality title view page
+        $view = new Template();
+        echo $view->render('views/add/trivia/trivia_questions.html');
+    }
+
 
     // Route to add personality title
     function addPersonalityTitle()
@@ -92,4 +123,6 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/personality/personality_title.php');
     }
+
+
 }

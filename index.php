@@ -25,6 +25,7 @@ $controller = new QuizController($f3);
 $f3->route('GET /', 'QuizController->home');
 $f3->route('GET /addChoice', 'QuizController->addChoice');
 $f3->route('GET|POST /addTriviaTitle', 'QuizController->addTriviaTitle');
+$f3->route('GET|POST /addTriviaQuestions', 'QuizController->addTriviaQuestions');
 $f3->route('GET|POST /addPersonalityTitle', 'QuizController->addPersonalityTitle');
 
 // Run Fat-Free

@@ -34,6 +34,7 @@ class QuizDataLayer {
 
     }
 
+
     /**
      * @param string $quiz_title
      */
@@ -93,8 +94,7 @@ class QuizDataLayer {
 
 
 
-
-    function addTriviaQuiz($title, $desc, $tOrP) {
+    function addTriviaQuiz($tOrP) {
         // the method also generates a unique key and saves it to an array in data-layer
 
         //  you'll eventually send the array to the getTriviaQuiz page method
