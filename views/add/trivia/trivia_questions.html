@@ -6,5 +6,117 @@
 <include href="views/header.html"></include>
 
 
+
+<!-- Main Content -->
+<section id="quizForm">
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="create">
+            <h1>Create Trivia Quiz Questions</h1><hr>
+            <form action="#" method="post">
+
+                    <!-- Quiz Title Input -->
+                <label for="questionTitle">Question Title:</label>
+                <input type="text" id="questionTitle" placeholder="Enter question title">
+
+                <div class="question-container">
+                    <input class="question-text" type="text" id="questionName1" placeholder="Enter option title1"><input class="question-radio" type="radio" name="question" id="question1" value="question1"></input><br>
+                </div>
+
+                <div class="question-container">
+                    <input class="question-text" type="text" id="questionName2" placeholder="Enter option title2"><input class="question-radio" type="radio" name="question" id="question2" value="question2"></input><br>
+                </div>
+
+                <div class="question-container">
+                    <input class="question-text" type="text" id="questionName3" placeholder="Enter option title3"><input class="question-radio" type="radio" name="question" id="question3" value="question3"></input><br>
+                </div>
+
+<!--                    <label for="question2">option 2</label>-->
+<!--                     <input type="radio" name="question" id="question2" value="question2">-->
+
+<!--                    <label for="question3">option 3</label>-->
+<!--                    <input type="radio" name="question" id="question3" value="question3">-->
+
+                <button onclick="addQuestion()">Add Question</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <!-- JavaScript functions -->
+    <script>
+        function addQuestion() {
+            // Create a new question container
+            var questionContainer = document.createElement('div');
+
+            // Add question title input
+            var questionTitleInput = document.createElement('input');
+            questionTitleInput.type = 'text';
+            questionTitleInput.placeholder = 'Enter question title';
+            questionContainer.appendChild(questionTitleInput);
+
+            // Add options
+            for (var i = 1; i <= 4; i++) {
+                var optionLabel = document.createElement('label');
+                optionLabel.innerHTML = 'Option ' + i;
+
+                var optionInput = document.createElement('input');
+                optionInput.type = 'radio';
+                optionInput.name = 'question';  // Use the same name for all options in a question
+                optionInput.setAttribute('data-question-index', i); // Set the data attribute
+                optionInput.classList.add('form-check-input');
+
+
+                // Attach event listener to highlight correct and incorrect options
+                optionInput.addEventListener('change', function() {
+                    highlightOptions(this);
+                });
+
+                var optionText = document.createElement('input');
+                optionText.type = 'text';
+                optionText.classList.add('form-control'); // Bootstrap styling
+
+                optionLabel.classList.add('form-check'); // Bootstrap styling
+                optionLabel.appendChild(optionInput);
+                optionLabel.appendChild(optionText);
+
+                questionContainer.appendChild(optionLabel);
+            }
+
+            // Add a button to remove the question
+            var removeButton = document.createElement('button');
+            removeButton.innerHTML = 'Remove Question';
+            removeButton.classList.add('btn', 'btn-danger'); // Bootstrap styling
+            removeButton.addEventListener('click', function() {
+                questionContainer.remove();
+            });
+            questionContainer.appendChild(removeButton);
+
+            // Append the new question container to the document
+            document.body.appendChild(questionContainer);
+        }
+
+        function highlightOptions(selectedOption) {
+            var questionIndex = selectedOption.getAttribute('data-question-index');
+
+            var options = document.querySelectorAll('input[data-question-index="' + questionIndex + '"]');
+            for (var i = 0; i < options.length; i++) {
+                if (options[i] === selectedOption) {
+                    options[i].parentNode.classList.add('correct');
+                } else {
+                    options[i].parentNode.classList.remove('correct');
+                    options[i].parentNode.classList.add('incorrect');
+                }
+            }
+        }
+
+
+
+    </script>
+</section>
+
 </body>
 </html>

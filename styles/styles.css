@@ -81,3 +81,34 @@ a {
 a:hover {
     color: #676767;
 }
+
+
+
+
+
+.question-text {
+    /*top-left; top-right; bottom-right; bottom-left*/
+    border-radius: 20px 0 0 20px;
+    border-right-color: transparent;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+    background-color: #ff789b;
+    height: 30px;
+    width: 30px;
+    border-radius: 0 20px 20px 0;
+    border: solid black;
+    border-left: transparent;
+
+}
+
+input[type=radio]:checked {
+    background: #58d2c4;
+}
+
+.question-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
