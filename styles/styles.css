@@ -89,26 +89,65 @@ a:hover {
 .question-text {
     /*top-left; top-right; bottom-right; bottom-left*/
     border-radius: 20px 0 0 20px;
+    border: solid #2f2f2f 1px;
     border-right-color: transparent;
+    margin-left: 1%;
+
 }
 
 input[type=radio] {
     -webkit-appearance: none;
-    background-color: #ff789b;
-    height: 30px;
+    background-color: #ff8fcf;
+    height: 28px;
     width: 30px;
     border-radius: 0 20px 20px 0;
-    border: solid black;
+    border: solid #2f2f2f 1px;
     border-left: transparent;
 
 }
 
 input[type=radio]:checked {
-    background: #58d2c4;
+    background: #58d29b;
 }
 
 .question-container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    margin-left: 3%;
+}
+
+
+.question-button {
+    width: 20%;
+    padding: 2%;
+    border-radius: 10px;
+    color: white;
+    margin: 1% 1% 1% 3%;
+
+    /*Styles so the button hovers in the screen*/
+    position: fixed;
+    top: 5px;
+    left: 10px;
+}
+
+
+.question-title-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.question-title {
+    margin-left: 1%;
+    border-radius: 10px;
+    border: solid #2f2f2f 2px;
+}
+
+
+.question {
+    padding: 2%;
+    background-color: #aad9e0;
+    border-radius: 10px;
+    margin-top: 2%;
 }

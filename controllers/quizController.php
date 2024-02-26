@@ -77,7 +77,7 @@ class QuizController
 
 
                 // set questions
-                $data_layer->setQuestions($_POST['question']);
+//                $data_layer->setQuestions($_POST['question']);
 
                 $this->_f3->reroute('/addChoice');
             }
