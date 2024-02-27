@@ -125,6 +125,10 @@ input[type=radio]:checked {
     color: white;
     margin: 1% 1% 1% 3%;
 
+
+}
+
+.question-float {
     /*Styles so the button hovers in the screen*/
     position: fixed;
     top: 5px;
