@@ -5,50 +5,47 @@
 -->
 <include href="views/header.html"></include>
 
-
-
 <!-- Main Content -->
 <section id="quizForm">
-<div class="row mt-4">
-    <div class="col-md-12">
-        <div class="create">
-            <h1>Create Trivia Quiz Questions</h1><hr>
-            <form action="#" method="post">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="create">
+                <h1>Create Trivia Quiz Questions</h1><hr>
+                <form action="#" method="post">
 
                     <!-- Quiz Title Input -->
-                <div class="questions">
-                    <div class="question">
-                        <div class="question-title-container">
-                            <label for="questionTitle1">Question 1 Title:</label>
-                            <input class="question-title" type="text" id="questionTitle1" placeholder="Enter question title">
-                        </div>
+                    <div class="questions">
+                        <div class="question">
+                            <div class="question-title-container">
+                                <label for="questionTitle1">Question 1 Title:</label>
+                                <input class="question-title" type="text" id="questionTitle1" placeholder="Enter question title">
+                            </div>
 
-                        <div class="question-container ml-3">
-                            <label for="question1Option1">Option Title:</label>
-                            <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1"><input class="question-radio" type="radio" name="question-group1" id="question1Radio1" value="question1Radio1" required></input><br>
-                        </div>
+                            <div class="question-container ml-3">
+                                <label for="question1Option1">Option Title:</label>
+                                <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1">
+                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio1" value="question1Radio1" required></input><br>
+                            </div>
 
-                        <div class="question-container">
-                            <label for="question1Option2">Option Title:</label>
-                            <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2"><input class="question-radio" type="radio" name="question-group1" id="question1Radio2" value="question1Radio2"></input><br>
-                        </div>
+                            <div class="question-container">
+                                <label for="question1Option2">Option Title:</label>
+                                <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2">
+                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio2" value="question1Radio2"></input><br>
+                            </div>
 
-                        <div>
-                            <button class="question-button" type="button" onclick="addOption()">Add Option</button>
+                            <div>
+                                <button class="question-button" type="button" onclick="addOption(this)">Add Option</button>
+                            </div>
                         </div>
                     </div>
 
-                </div>
+                    <button class="question-button question-float" type="button" onclick="addQuestion()">Add Question</button>
 
-
-
-                <button class="question-button question-float" type="button" onclick="addQuestion()">Add Question</button>
-
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+
     <script>
         let questionCounter = 1;  // Initialize a counter for questions
         let groupCounter = 1;      // Initialize a counter for question groups
@@ -95,7 +92,7 @@
 
             // Create a new div element for the button
             let buttonContainer = document.createElement('div');
-            buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption()">Add Option</button>';
+            buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption(this)">Add Option</button>';
 
             // Append the button container to the new question div
             newQuestionDiv.appendChild(buttonContainer);
@@ -105,16 +102,54 @@
             questionsContainer.appendChild(newQuestionDiv);
         }
 
-        function addOption() {
-            // Add your logic for handling the "Add Option" button click
-            // For now, let's just log a message to the console
-            console.log("Add Option button clicked!");
+        function addOption(button) {
+            let currentQuestion = button.closest('.question');
+
+            if (currentQuestion) {
+                // Count the number of existing options to determine the index for the new option
+                let existingOptions = currentQuestion.querySelectorAll('.question-container');
+                let newIndex = existingOptions.length + 1;
+
+                let newOptionContainer = document.createElement('div');
+                newOptionContainer.className = 'question-container';
+
+                // Get the question number from the current question title
+                let questionTitleContainer = currentQuestion.querySelector('.question-title-container');
+                let questionTitleLabel = questionTitleContainer ? questionTitleContainer.querySelector('label') : null;
+                let questionNumber = questionTitleLabel ? questionTitleLabel.getAttribute('for').match(/\d+/) : '';
+                questionNumber = questionNumber ? questionNumber[0] : '';
+
+                // Create new input fields for the option
+                let newOptionLabel = document.createElement('label');
+                newOptionLabel.setAttribute('for', `question${questionNumber}Option${newIndex}`);
+                newOptionLabel.textContent = 'Option Title:';
+
+                let newOptionInput = document.createElement('input');
+                newOptionInput.className = 'question-text';
+                newOptionInput.type = 'text';
+                newOptionInput.id = `question${questionNumber}Option${newIndex}`;
+                newOptionInput.placeholder = `Enter option title${newIndex}`;  // Incremented placeholder
+
+                let newOptionRadio = document.createElement('input');
+                newOptionRadio.className = 'question-radio';
+                newOptionRadio.type = 'radio';
+                newOptionRadio.name = `question-group${questionNumber}`;
+                newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
+                newOptionRadio.value = `question${questionNumber}Radio${newIndex}`;
+
+                // Append the new input fields to the container
+                newOptionContainer.appendChild(newOptionLabel);
+                newOptionContainer.appendChild(newOptionInput);
+                newOptionContainer.appendChild(newOptionRadio);
+
+                // Insert the new option container before the button's parent node
+                currentQuestion.insertBefore(newOptionContainer, button.parentNode);
+            } else {
+                console.error('Error: Unable to find the parent question container.');
+            }
         }
 
     </script>
-
-
 </section>
-
 </body>
 </html>
