@@ -18,7 +18,7 @@
                     <!-- Quiz Title Input -->
                 <div class="question">
                     <div class="question-title-container">
-                        <label for="questionTitle">Question Title:</label>
+                        <label for="questionTitle">Question 1 Title:</label>
                         <input class="question-title" type="text" id="questionTitle" placeholder="Enter question title">
                     </div>
 
@@ -38,6 +38,7 @@
                 </div>
 
 
+
                 <button class="question-button" type="button" onclick="addQuestion()">Add Question</button>
 
 
@@ -46,13 +47,19 @@
     </div>
 </div>
     <script>
+        var questionCounter = 1;  // Initialize a counter for questions
+
         function addQuestion() {
+            // Increment the question counter
+            questionCounter++;
+
             // Create a new div element for the question
             var newQuestionDiv = document.createElement('div');
             newQuestionDiv.className = 'question';
 
             // Copy the question title container
             var questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
+            questionTitleContainer.querySelector('label').innerText = 'Question ' + questionCounter + ' Title:';
             newQuestionDiv.appendChild(questionTitleContainer);
 
             // Copy the first option container
@@ -70,21 +77,19 @@
             // Append the button container to the new question div
             newQuestionDiv.appendChild(buttonContainer);
 
-            // Find the element after which you want to insert the new question div
-            var h1Element = document.querySelector('.question');
+            // Find the element before which you want to insert the new question div (in this case, the "Add Question" button)
+            var addQuestionButton = document.querySelector('.question-button[type="button"]');
 
-            // Insert the new question div after the h1 element
-            h1Element.parentNode.insertBefore(newQuestionDiv, h1Element.nextSibling);
+            // Insert the new question div before the "Add Question" button
+            addQuestionButton.parentNode.insertBefore(newQuestionDiv, addQuestionButton);
         }
-
 
         function addOption() {
-            // Add your logic for handling the "Add Question" button click
+            // Add your logic for handling the "Add Option" button click
             // For now, let's just log a message to the console
-            console.log("Add Question button clicked!");
+            console.log("Add Option button clicked!");
         }
     </script>
-
 
 
 </section>
