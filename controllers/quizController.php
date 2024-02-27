@@ -33,9 +33,15 @@ class QuizController
             if (!validQuizTitle($_POST['title'])) {
                 $this->_f3->set('errors["quiz_title"]', "Invalid Quiz Title");
             }
+            if (strlen($_POST['title']) > 255) {
+                $this->_f3->set('errors["quiz_title"]', "Quiz Title must be 255 characters or less");
+            }
 
             if (!validDesc($_POST['desc'])) {
                 $this->_f3->set('errors["quiz_desc"]', "Invalid Quiz Description");
+            }
+            if (strlen($_POST['desc']) > 500) {
+                $this->_f3->set('errors["quiz_desc"]', "Quiz Description must be 500 characters or less");
             }
 
 

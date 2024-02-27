@@ -43,7 +43,7 @@ CREATE TABLE p_results (
 CREATE TABLE t_quiz (
   id INT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL
+  description VARCHAR(500) NOT NULL
 );
 
 -- Create the 't_questions' table
