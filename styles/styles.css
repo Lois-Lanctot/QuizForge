@@ -128,13 +128,20 @@ input[type=radio]:checked {
 
 }
 
-.question-float {
+.question-float-left {
     /*Styles so the button hovers in the screen*/
     position: fixed;
     top: 5px;
     left: 10px;
 }
 
+
+.question-float-right {
+    /*Styles so the button hovers in the screen*/
+    position: fixed;
+    top: 5px;
+    right: 10px;
+}
 
 .question-title-container {
     display: flex;
