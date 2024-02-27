@@ -16,25 +16,28 @@
             <form action="#" method="post">
 
                     <!-- Quiz Title Input -->
-                <div class="question">
-                    <div class="question-title-container">
-                        <label for="questionTitle">Question 1 Title:</label>
-                        <input class="question-title" type="text" id="questionTitle" placeholder="Enter question title">
+                <div class="questions">
+                    <div class="question">
+                        <div class="question-title-container">
+                            <label for="questionTitle1">Question 1 Title:</label>
+                            <input class="question-title" type="text" id="questionTitle1" placeholder="Enter question title">
+                        </div>
+
+                        <div class="question-container ml-3">
+                            <label for="question1Option1">Option Title:</label>
+                            <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1"><input class="question-radio" type="radio" name="question-group1" id="question1Radio1" value="question1Radio1"></input><br>
+                        </div>
+
+                        <div class="question-container">
+                            <label for="question1Option2">Option Title:</label>
+                            <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2"><input class="question-radio" type="radio" name="question-group1" id="question1Radio2" value="question1Radio2"></input><br>
+                        </div>
+
+                        <div>
+                            <button class="question-button" type="button" onclick="addOption()">Add Option</button>
+                        </div>
                     </div>
 
-                    <div class="question-container ml-3">
-                        <label for="question1Option1">Option Title:</label>
-                        <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1"><input class="question-radio" type="radio" name="question" id="question1" value="question1"></input><br>
-                    </div>
-
-                    <div class="question-container">
-                        <label for="question1Option2">Option Title:</label>
-                        <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2"><input class="question-radio" type="radio" name="question" id="question2" value="question2"></input><br>
-                    </div>
-
-                    <div>
-                        <button class="question-button" type="button" onclick="addOption()">Add Option</button>
-                    </div>
                 </div>
 
 
@@ -47,41 +50,59 @@
     </div>
 </div>
     <script>
-        var questionCounter = 1;  // Initialize a counter for questions
+        let questionCounter = 1;  // Initialize a counter for questions
+        let groupCounter = 1;      // Initialize a counter for question groups
 
         function addQuestion() {
-            // Increment the question counter
+            // Increment the question and group counters
             questionCounter++;
+            groupCounter++;
 
             // Create a new div element for the question
-            var newQuestionDiv = document.createElement('div');
+            let newQuestionDiv = document.createElement('div');
             newQuestionDiv.className = 'question';
 
             // Copy the question title container
-            var questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
-            questionTitleContainer.querySelector('label').innerText = 'Question ' + questionCounter + ' Title:';
+            let questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
+
+            // Update the id and label for the question title input
+            let questionTitleInput = questionTitleContainer.querySelector('.question-title');
+            let questionTitleLabel = questionTitleContainer.querySelector('label');
+
+            questionTitleInput.id = 'questionTitle' + questionCounter;
+            questionTitleLabel.setAttribute('for', 'questionTitle' + questionCounter);
+            questionTitleLabel.innerText = 'Question ' + questionCounter + ' Title:';
+
             newQuestionDiv.appendChild(questionTitleContainer);
 
-            // Copy the first option container
-            var optionContainer1 = document.querySelector('.question-container.ml-3').cloneNode(true);
+            // Create a new option container 1
+            let optionContainer1 = document.createElement('div');
+            optionContainer1.className = 'question-container ml-3';
+            optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
+                '<input class="question-text" type="text" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
+                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio1" value="question' + questionCounter + 'Radio1">';
+
             newQuestionDiv.appendChild(optionContainer1);
 
-            // Copy the second option container
-            var optionContainer2 = document.querySelector('.question-container').cloneNode(true);
+            // Create a new option container 2
+            let optionContainer2 = document.createElement('div');
+            optionContainer2.className = 'question-container';
+            optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
+                '<input class="question-text" type="text" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
+                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio2" value="question' + questionCounter + 'Radio2">';
+
             newQuestionDiv.appendChild(optionContainer2);
 
             // Create a new div element for the button
-            var buttonContainer = document.createElement('div');
+            let buttonContainer = document.createElement('div');
             buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption()">Add Option</button>';
 
             // Append the button container to the new question div
             newQuestionDiv.appendChild(buttonContainer);
 
-            // Find the element before which you want to insert the new question div (in this case, the "Add Question" button)
-            var addQuestionButton = document.querySelector('.question-button[type="button"]');
-
-            // Insert the new question div before the "Add Question" button
-            addQuestionButton.parentNode.insertBefore(newQuestionDiv, addQuestionButton);
+            // Find the element with the class "questions" and append the new question div to it
+            let questionsContainer = document.querySelector('.questions');
+            questionsContainer.appendChild(newQuestionDiv);
         }
 
         function addOption() {
@@ -89,6 +110,7 @@
             // For now, let's just log a message to the console
             console.log("Add Option button clicked!");
         }
+
     </script>
 
 
