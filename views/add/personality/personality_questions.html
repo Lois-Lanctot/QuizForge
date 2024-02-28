@@ -22,15 +22,13 @@
                             </div>
 
                             <div class="question-container ml-3">
-                                <label for="question1Option1">Option Title:</label>
-                                <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1">
-                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio1" value="question1Radio1" required></input><br>
+                                <label for="question1Answer1">Answer Title:</label>
+                                <input class="question-text" type="text" id="question1Answer1" placeholder="Enter answer title1">
                             </div>
 
                             <div class="question-container">
-                                <label for="question1Option2">Option Title:</label>
-                                <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2">
-                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio2" value="question1Radio2"></input><br>
+                                <label for="question1Answer2">Answer Title:</label>
+                                <input class="question-text" type="text" id="question1Answer2" placeholder="Enter answer title2">
                             </div>
 
                             <div>
@@ -57,63 +55,42 @@
             questionCounter++;
             groupCounter++;
 
-            // Create a new div element for the question
-            let newQuestionDiv = document.createElement('div');
-            newQuestionDiv.className = 'question';
+            // Find the template question element
+            let questionTemplate = document.querySelector('.question');
 
-            // Copy the question title container
-            let questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
+            // Clone the template
+            let newQuestionDiv = questionTemplate.cloneNode(true);
 
-            // Update the id and label for the question title input
-            let questionTitleInput = questionTitleContainer.querySelector('.question-title');
-            let questionTitleLabel = questionTitleContainer.querySelector('label');
+            // Update the IDs and labels for the cloned question and its children
+            let questionNumber = questionCounter;
+            let inputs = newQuestionDiv.querySelectorAll('input, textarea, label');
+            inputs.forEach(input => {
+                let id = input.getAttribute('id');
+                if (id) {
+                    input.setAttribute('id', id.replace(/\d+/, questionNumber));
+                }
+                let forAttr = input.getAttribute('for');
+                if (forAttr) {
+                    input.setAttribute('for', forAttr.replace(/\d+/, questionNumber));
+                }
+            });
 
-            questionTitleInput.id = 'questionTitle' + questionCounter;
-            questionTitleLabel.setAttribute('for', 'questionTitle' + questionCounter);
-            questionTitleLabel.innerText = 'Question ' + questionCounter + ' Title:';
-
-            newQuestionDiv.appendChild(questionTitleContainer);
-
-            // Create a new option container 1
-            let optionContainer1 = document.createElement('div');
-            optionContainer1.className = 'question-container ml-3';
-            optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
-                '<input class="question-text" type="text" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
-                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio1" value="question' + questionCounter + 'Radio1">';
-
-            newQuestionDiv.appendChild(optionContainer1);
-
-            // Create a new option container 2
-            let optionContainer2 = document.createElement('div');
-            optionContainer2.className = 'question-container';
-            optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
-                '<input class="question-text" type="text" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
-                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio2" value="question' + questionCounter + 'Radio2">';
-
-            newQuestionDiv.appendChild(optionContainer2);
-
-            // Create a new div element for the button
-            let buttonContainer = document.createElement('div');
-            buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption(this)">Add Option</button>';
-
-            // Append the button container to the new question div
-            newQuestionDiv.appendChild(buttonContainer);
-
-            // Find the element with the class "questions" and append the new question div to it
+            // Append the cloned question to the questions container
             let questionsContainer = document.querySelector('.questions');
             questionsContainer.appendChild(newQuestionDiv);
         }
 
+        // Modify the addOption function to add answer inputs instead of options
         function addOption(button) {
             let currentQuestion = button.closest('.question');
 
             if (currentQuestion) {
-                // Count the number of existing options to determine the index for the new option
-                let existingOptions = currentQuestion.querySelectorAll('.question-container');
-                let newIndex = existingOptions.length + 1;
+                // Count the number of existing answers to determine the index for the new answer
+                let existingAnswers = currentQuestion.querySelectorAll('.question-container');
+                let newIndex = existingAnswers.length + 1;
 
-                let newOptionContainer = document.createElement('div');
-                newOptionContainer.className = 'question-container';
+                let newAnswerContainer = document.createElement('div');
+                newAnswerContainer.className = 'question-container';
 
                 // Get the question number from the current question title
                 let questionTitleContainer = currentQuestion.querySelector('.question-title-container');
@@ -121,36 +98,27 @@
                 let questionNumber = questionTitleLabel ? questionTitleLabel.getAttribute('for').match(/\d+/) : '';
                 questionNumber = questionNumber ? questionNumber[0] : '';
 
-                // Create new input fields for the option
-                let newOptionLabel = document.createElement('label');
-                newOptionLabel.setAttribute('for', `question${questionNumber}Option${newIndex}`);
-                newOptionLabel.textContent = 'Option Title:';
+                // Create new input fields for the answer
+                let newAnswerLabel = document.createElement('label');
+                newAnswerLabel.setAttribute('for', `question${questionNumber}Answer${newIndex}`);
+                newAnswerLabel.textContent = 'Answer Title:';
 
-                let newOptionInput = document.createElement('input');
-                newOptionInput.className = 'question-text';
-                newOptionInput.type = 'text';
-                newOptionInput.id = `question${questionNumber}Option${newIndex}`;
-                newOptionInput.placeholder = `Enter option title${newIndex}`;  // Incremented placeholder
-
-                let newOptionRadio = document.createElement('input');
-                newOptionRadio.className = 'question-radio';
-                newOptionRadio.type = 'radio';
-                newOptionRadio.name = `question-group${questionNumber}`;
-                newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
-                newOptionRadio.value = `question${questionNumber}Radio${newIndex}`;
+                let newAnswerInput = document.createElement('input');
+                newAnswerInput.className = 'question-text';
+                newAnswerInput.type = 'text';
+                newAnswerInput.id = `question${questionNumber}Answer${newIndex}`;
+                newAnswerInput.placeholder = `Enter answer title${newIndex}`;  // Incremented placeholder
 
                 // Append the new input fields to the container
-                newOptionContainer.appendChild(newOptionLabel);
-                newOptionContainer.appendChild(newOptionInput);
-                newOptionContainer.appendChild(newOptionRadio);
+                newAnswerContainer.appendChild(newAnswerLabel);
+                newAnswerContainer.appendChild(newAnswerInput);
 
-                // Insert the new option container before the button's parent node
-                currentQuestion.insertBefore(newOptionContainer, button.parentNode);
+                // Insert the new answer container before the button's parent node
+                currentQuestion.insertBefore(newAnswerContainer, button.parentNode);
             } else {
                 console.error('Error: Unable to find the parent question container.');
             }
         }
-
     </script>
 </section>
 </body>
