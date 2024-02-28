@@ -60,10 +60,8 @@ class QuizController
 
         // Display the add trivia title view page
         $view = new Template();
-        echo $view->render('views/add/trivia/trivia_title.php');
+        echo $view->render('views/add/trivia/trivia_title.html');
     }
-
-
 
     function addTriviaQuestions()
     {
@@ -83,7 +81,9 @@ class QuizController
                 // set questions
 //                $data_layer->setQuestions($_POST['question']);
 
-                $this->_f3->reroute('/addChoice');
+//                $this->_f3->reroute('/addChoice');
+
+//                var_dump($_POST['questionTitle1']);
             }
         }
 
@@ -91,6 +91,8 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_questions.html');
     }
+
+
 
 
     // Route to add personality title

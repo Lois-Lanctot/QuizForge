@@ -18,19 +18,19 @@
                         <div class="question">
                             <div class="question-title-container">
                                 <label for="questionTitle1">Question 1 Title:</label>
-                                <input class="question-title" type="text" id="questionTitle1" placeholder="Enter question title">
+                                <input class="question-title" type="text" name="question_title1" id="questionTitle1" placeholder="Enter question title">
                             </div>
 
                             <div class="question-container ml-3">
                                 <label for="question1Option1">Option Title:</label>
-                                <input class="question-text" type="text" id="question1Option1" placeholder="Enter option title1">
-                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio1" value="question1Radio1" required></input><br>
+                                <input class="question-text" type="text" name="question1_text1" id="question1Option1" placeholder="Enter option title1">
+                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio1" value="question1Radio1" required></input><br>
                             </div>
 
                             <div class="question-container">
                                 <label for="question1Option2">Option Title:</label>
-                                <input class="question-text" type="text" id="question1Option2" placeholder="Enter option title2">
-                                <input class="question-radio" type="radio" name="question-group1" id="question1Radio2" value="question1Radio2"></input><br>
+                                <input class="question-text" type="text" name="question1_text2" id="question1Option2" placeholder="Enter option title2">
+                                <input class="question-radio" type="radio" name="question1_radio2" id="question1Radio2" value="question1Radio2"></input><br>
                             </div>
 
                             <div>
@@ -47,7 +47,6 @@
             </div>
         </div>
     </div>
-
     <script>
         let questionCounter = 1;  // Initialize a counter for questions
         let groupCounter = 1;      // Initialize a counter for question groups
@@ -78,8 +77,8 @@
             let optionContainer1 = document.createElement('div');
             optionContainer1.className = 'question-container ml-3';
             optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
-                '<input class="question-text" type="text" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
-                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio1" value="question' + questionCounter + 'Radio1">';
+                '<input class="question-text" type="text" name="question' + questionCounter + '_text1" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + groupCounter + '" id="question' + questionCounter + 'Radio1" value="question' + questionCounter + 'Radio1">';
 
             newQuestionDiv.appendChild(optionContainer1);
 
@@ -87,8 +86,8 @@
             let optionContainer2 = document.createElement('div');
             optionContainer2.className = 'question-container';
             optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
-                '<input class="question-text" type="text" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
-                '<input class="question-radio" type="radio" name="question-group' + groupCounter + '" id="question' + questionCounter + 'Radio2" value="question' + questionCounter + 'Radio2">';
+                '<input class="question-text" type="text" name="question' + questionCounter + '_text2" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + groupCounter + '" id="question' + questionCounter + 'Radio2" value="question' + questionCounter + 'Radio2">';
 
             newQuestionDiv.appendChild(optionContainer2);
 
@@ -129,13 +128,14 @@
                 let newOptionInput = document.createElement('input');
                 newOptionInput.className = 'question-text';
                 newOptionInput.type = 'text';
+                newOptionInput.name = `question${questionNumber}_text${newIndex}`;
                 newOptionInput.id = `question${questionNumber}Option${newIndex}`;
                 newOptionInput.placeholder = `Enter option title${newIndex}`;  // Incremented placeholder
 
                 let newOptionRadio = document.createElement('input');
                 newOptionRadio.className = 'question-radio';
                 newOptionRadio.type = 'radio';
-                newOptionRadio.name = `question-group${questionNumber}`;
+                newOptionRadio.name = `question${questionNumber}_radio${newIndex}`;
                 newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
                 newOptionRadio.value = `question${questionNumber}Radio${newIndex}`;
 
@@ -150,8 +150,9 @@
                 console.error('Error: Unable to find the parent question container.');
             }
         }
-
     </script>
+
+
 </section>
 </body>
 </html>
