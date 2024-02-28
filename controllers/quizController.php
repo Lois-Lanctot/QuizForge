@@ -190,9 +190,9 @@ class QuizController
     {
 
         $data_layer = new QuizDataLayer();
-//        $this->_f3->set('titles', $data_layer->getQuizTitles());
-        $this->_f3->set('titles', array("cfwq", "xfwq", "xa"));
-        var_dump($data_layer->getQuizTitles());
+        $this->_f3->set('titles', $data_layer->getTriviaQuizTitles());
+//        $this->_f3->set('titles', array("object1", "object2", "object3"));
+        var_dump($data_layer->getTriviaQuizTitles());
 
 
         // Display the add choice view page

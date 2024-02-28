@@ -98,7 +98,7 @@ class QuizDataLayer {
 
 
 
-    function getQuizTitles() {
+    function getTriviaQuizTitles() {
 
         //SELECT Query
         //1.
