@@ -94,6 +94,33 @@ class QuizDataLayer {
 
 
 
+
+
+
+
+    function getQuizTitles() {
+
+        //SELECT Query
+        //1.
+        $sql = "SELECT title FROM t_quiz";
+
+        //2.
+        $statement = $this->_dbh->prepare($sql);
+
+        //4.
+        $statement->execute();
+
+        //5.
+        // Return the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
+
+
+
+
     function addTriviaQuiz($tOrP) {
         // the method also generates a unique key and saves it to an array in data-layer
 

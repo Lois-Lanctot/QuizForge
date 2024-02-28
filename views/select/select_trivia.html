@@ -6,15 +6,20 @@
 <include href="views/header.html"></include>
 
 
+<repeat group="{{ @titles }}" value="{{ @title }}">
+    {{ @title }}
+</repeat>
+
+
 <!-- Main Content -->
 <div class="container-fluid mt-5">
-    <!-- Title and Description -->
     <div class="row justify-content-center">
         <div class="col-12 text-center" id="color-box">
             <h4>Select a Trivia Quiz to Take</h4>
             <img id="arrow-img" src="images/white_arrow.png" alt="down arrow pic">
         </div>
     </div>
+
 
     <div class="row mt-4">
         <!-- Display Quizzes -->

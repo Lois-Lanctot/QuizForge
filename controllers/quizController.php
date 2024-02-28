@@ -188,6 +188,13 @@ class QuizController
 
     function selectTrivia()
     {
+
+        $data_layer = new QuizDataLayer();
+//        $this->_f3->set('titles', $data_layer->getQuizTitles());
+        $this->_f3->set('titles', array("cfwq", "xfwq", "xa"));
+        var_dump($data_layer->getQuizTitles());
+
+
         // Display the add choice view page
         $view = new Template();
         echo $view->render('views/select/select_trivia.html');
