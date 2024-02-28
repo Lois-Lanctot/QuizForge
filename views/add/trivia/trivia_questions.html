@@ -24,13 +24,13 @@
                             <div class="question-container ml-3">
                                 <label for="question1Option1">Option Title:</label>
                                 <input class="question-text" type="text" name="question1_text1" id="question1Option1" placeholder="Enter option title1">
-                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio1" value="question1Radio1" required></input><br>
+                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio1" value="option1"></input><br>
                             </div>
 
                             <div class="question-container">
                                 <label for="question1Option2">Option Title:</label>
                                 <input class="question-text" type="text" name="question1_text2" id="question1Option2" placeholder="Enter option title2">
-                                <input class="question-radio" type="radio" name="question1_radio2" id="question1Radio2" value="question1Radio2"></input><br>
+                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio2" value="option2"></input><br>
                             </div>
 
                             <div>
@@ -71,6 +71,9 @@
             questionTitleLabel.setAttribute('for', 'questionTitle' + questionCounter);
             questionTitleLabel.innerText = 'Question ' + questionCounter + ' Title:';
 
+            // Increment the number in the name attribute of the question title input
+            questionTitleInput.name = 'question_title' + questionCounter;
+
             newQuestionDiv.appendChild(questionTitleContainer);
 
             // Create a new option container 1
@@ -78,7 +81,7 @@
             optionContainer1.className = 'question-container ml-3';
             optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
                 '<input class="question-text" type="text" name="question' + questionCounter + '_text1" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
-                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + groupCounter + '" id="question' + questionCounter + 'Radio1" value="question' + questionCounter + 'Radio1">';
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio1" value="option' + (groupCounter - 1) + '">';
 
             newQuestionDiv.appendChild(optionContainer1);
 
@@ -87,7 +90,7 @@
             optionContainer2.className = 'question-container';
             optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
                 '<input class="question-text" type="text" name="question' + questionCounter + '_text2" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
-                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + groupCounter + '" id="question' + questionCounter + 'Radio2" value="question' + questionCounter + 'Radio2">';
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio2" value="option' + groupCounter + '">';
 
             newQuestionDiv.appendChild(optionContainer2);
 
@@ -135,9 +138,9 @@
                 let newOptionRadio = document.createElement('input');
                 newOptionRadio.className = 'question-radio';
                 newOptionRadio.type = 'radio';
-                newOptionRadio.name = `question${questionNumber}_radio${newIndex}`;
+                newOptionRadio.name = `question${questionNumber}_radio${questionNumber}`;
                 newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
-                newOptionRadio.value = `question${questionNumber}Radio${newIndex}`;
+                newOptionRadio.value = `option${newIndex}`;
 
                 // Append the new input fields to the container
                 newOptionContainer.appendChild(newOptionLabel);

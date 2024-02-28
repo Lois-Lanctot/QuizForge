@@ -83,7 +83,28 @@ class QuizController
 
 //                $this->_f3->reroute('/addChoice');
 
-//                var_dump($_POST['questionTitle1']);
+//                var_dump($_POST['question1_text1']);
+//                var_dump($_POST['question_title1']);
+
+                // radio button stuff
+//                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//                    if (isset($_POST['question1_radio1'])) {
+//                        $selectedOption = $_POST['question1_radio1'];
+//
+//                        if ($selectedOption == 'option1') {
+//                            echo "Option 1 (question1Radio1) was selected.";
+//                        } elseif ($selectedOption == 'option2') {
+//                            echo "Option 2 (question1Radio2) was selected.";
+//                        } else {
+//                            echo "Unknown option selected.";
+//                        }
+//                    } else {
+//                        echo "No option selected.";
+//                    }
+//                }
+
+
+
             }
         }
 
