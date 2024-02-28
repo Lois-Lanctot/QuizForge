@@ -158,4 +158,23 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/personality/personality_questions.html');
     }
+
+
+
+
+
+    function selectTrivia()
+    {
+        // Display the add choice view page
+        $view = new Template();
+        echo $view->render('views/select/select_trivia.html');
+    }
+
+    function selectPersonality()
+    {
+        // Display the add choice view page
+        $view = new Template();
+        echo $view->render('views/select/select_personality.html');
+
+    }
 }
