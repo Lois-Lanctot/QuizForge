@@ -69,6 +69,11 @@ INSERT INTO `t_quiz`( id, `title`, `description`) VALUES (2, 'Quiz Test 2','lore
 
 INSERT INTO `t_quiz`( id, `title`, `description`) VALUES (3, 'Quiz Test 3','lorem ipsum dolor sit amet, consectetur adip esse cillum iscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a in reprehenderit in voluptate velit');
 
+INSERT INTO `t_quiz`( id, `title`, `description`) VALUES (4, 'Quiz Test 4','lorem ipsum dolor sit amet, consectetur adip esse cillum iscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a in reprehenderit in voluptate velit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a in reprehenderit in voluptate velit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a in reprehenderit in voluptate velit');
+
+INSERT INTO `t_quiz`( id, `title`, `description`) VALUES (5, 'Quiz Test 5','lorem ipsum dolor sit amet, consectetur adip esse cillum iscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim a in reprehenderit in voluptate velit');
+
+
 
 INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (1,'What is this quiz for',1);
 INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (1,'Why have we done this', 2);
