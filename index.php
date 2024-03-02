@@ -17,6 +17,8 @@ require_once ('model/validate.php');
 
 // Instantiate F3
 $f3 = Base::instance();
+$dataLayer = new QuizDataLayer();
+
 
 // Instantiate the Controller
 $controller = new QuizController($f3);

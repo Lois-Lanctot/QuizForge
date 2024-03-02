@@ -1,14 +1,26 @@
 <?php
+
+/**
+ * Controller object to define routes
+ */
 class QuizController
 {
     private $_f3; // Fat-Free instance
 
+
+    /**
+     * constructor for the QuizController object
+     * @param $f3
+     */
     function __construct($f3)
     {
         $this->_f3 = $f3;
     }
 
-    // Default route
+    /**
+     * sets up the default route
+     * @return void
+     */
     function home()
     {
         // Display the home view page
@@ -16,7 +28,32 @@ class QuizController
         echo $view->render('views/home.php');
     }
 
-    // Route to add choice
+
+    /**
+     * sets up the route for the select quiz page
+     * @return void
+     */
+    function selectTrivia()
+    {
+
+        $title = $GLOBALS['dataLayer']->getTriviaQuizTitles();
+        $this->_f3->set('titles', $title);
+//        var_dump($title);
+//        foreach ($title as $x => $titles) {
+//            echo " ". $x . $titles;
+//        }
+
+
+        // Display the add choice view page
+        $view = new Template();
+        echo $view->render('views/select/select_trivia.html');
+    }
+
+
+    /**
+     * sets up the route for the add choice page
+     * @return void
+     */
     function addChoice()
     {
         // Display the add choice view page
@@ -24,7 +61,11 @@ class QuizController
         echo $view->render('views/add/choice.php');
     }
 
-    // Route to add trivia title
+
+    /**
+     * sets up the route for the add quiz title page
+     * @return void
+     */
     function addTriviaTitle()
     {
         // Handle POST request to add trivia title
@@ -63,6 +104,11 @@ class QuizController
         echo $view->render('views/add/trivia/trivia_title.html');
     }
 
+
+    /**
+     * sets up the route for the add quiz questions page
+     * @return void
+     */
     function addTriviaQuestions()
     {
         // Handle POST request to add personality title
@@ -185,20 +231,6 @@ class QuizController
 
 
 
-
-    function selectTrivia()
-    {
-
-        $data_layer = new QuizDataLayer();
-        $this->_f3->set('titles', $data_layer->getTriviaQuizTitles());
-//        $this->_f3->set('titles', array("object1", "object2", "object3"));
-        var_dump($data_layer->getTriviaQuizTitles());
-
-
-        // Display the add choice view page
-        $view = new Template();
-        echo $view->render('views/select/select_trivia.html');
-    }
 
     function selectPersonality()
     {

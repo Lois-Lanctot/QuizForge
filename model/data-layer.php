@@ -1,9 +1,12 @@
 <?php
-// able to pull and add data from/to the database
 
 //Require the file that contains DB config
 require ($_SERVER['DOCUMENT_ROOT'].'/../config.php');
 
+
+/**
+ * Able to pull and add data from/to the database
+ */
 class QuizDataLayer
 {
 
@@ -11,15 +14,24 @@ class QuizDataLayer
      * @var PDO the database connection object
      */
     private $_dbh;
+
+    /**
+     * @var string current quiz title
+     */
     private $_quiz_title;
+
+    /**
+     * @var string current quiz description
+     */
     private $_quiz_desc;
+
+    /**
+     * @var array-key current quiz questions
+     */
     private $_questions;
 
     /**
-     * @param PDO $_dbh
-     * @param $_quiz_title
-     * @param $_quiz_desc
-     * @param $_questions
+     * constructor for the QuizDataLayer
      */
     function __construct()
     {
@@ -37,6 +49,7 @@ class QuizDataLayer
 
 
     /**
+     * Setter for the quiz title
      * @param string $quiz_title
      */
     function setQuizTitle($quiz_title)
@@ -45,6 +58,7 @@ class QuizDataLayer
     }
 
     /**
+     * Setter for the quiz description
      * @param string $quiz_desc
      */
     function setQuizDesc($quiz_desc)
@@ -73,6 +87,7 @@ class QuizDataLayer
 //setQuestions($title, $options);
 
     /**
+     * Setter for the quiz questions
      * @param string $title question title
      * @param mixed $options associative array of option names and results
      */
@@ -94,11 +109,10 @@ class QuizDataLayer
     }
 
 
-
-
-
-
-
+    /**
+     * getter for the trivia quiz titles in the database
+     * @return array|false
+     */
     function getTriviaQuizTitles()
     {
 
@@ -119,11 +133,11 @@ class QuizDataLayer
     }
 
 
-
-
-
-
-    function addTriviaQuiz($tOrP)
+    /**
+     * Adds a quiz to the database
+     * @return void
+     */
+    function addQuiz()
     {
         // the method also generates a unique key and saves it to an array in data-layer
 
@@ -135,8 +149,6 @@ class QuizDataLayer
 
         //check if any of the fields are blank, if they are you can't add the Quiz
         //if there's stuff in the variables, add a new quiz to the database
-        // check if the quiz is a trivia or personality quiz using the variable: tOrP (so ugly, sorry)
-
     }
 
 }

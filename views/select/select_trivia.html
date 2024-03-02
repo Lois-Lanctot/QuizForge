@@ -6,11 +6,6 @@
 <include href="views/header.html"></include>
 
 
-<repeat group="{{ @titles }}" value="{{ @title }}">
-    {{ @title }}
-</repeat>
-
-
 <!-- Main Content -->
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
@@ -18,34 +13,34 @@
             <h4>Select a Trivia Quiz to Take</h4>
             <img id="arrow-img" src="images/white_arrow.png" alt="down arrow pic">
         </div>
+        <button id="show">Go</button>
     </div>
 
 
     <div class="row mt-4">
         <!-- Display Quizzes -->
-        <div class="col-md-4">
-            <a href="selectPersonality" class="d-block">
-                <div class="box text-center box1">Personality Quizzes</div>
-            </a>
-        </div>
-
-
-        <div class="col-md-4">
-            <a href="addChoice" class="d-block">
-                <div class="box text-center box2">
-                    <p>Create a Quiz</p>
-                </div>
-            </a>
-        </div>
-
+        <div id="result"></div>
 
         <div class="col-md-4">
             <a href="selectTrivia" class="d-block">
                 <div class="box text-center box1">Trivia Quizzes</div>
             </a>
         </div>
+
+
     </div>
 </div>
 
 </body>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<script>
+    $("#show").click(function(){
+
+        // Make an Ajax call to a PHP script
+        $("#result").load("views/select/lookup.php");
+
+    });
+
+</script>
 </html>

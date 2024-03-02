@@ -1,6 +1,6 @@
 <!--
     Authors: Noah Lanctot, Lois Lanctot
-    File: index.html
+    File: home.php
     Description: QuizForge home page
 -->
 <include href="views/header.html"></include>
