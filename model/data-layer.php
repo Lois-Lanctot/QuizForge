@@ -42,7 +42,7 @@ class QuizDataLayer
 
         //SELECT Query
         //1.
-        $sql = "SELECT title FROM t_quiz";
+        $sql = "SELECT title, description FROM t_quiz";
 
         //2.
         $statement = $this->_dbh->prepare($sql);

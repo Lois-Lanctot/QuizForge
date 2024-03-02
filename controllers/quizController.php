@@ -38,10 +38,6 @@ class QuizController
 
         $title = $GLOBALS['dataLayer']->getTriviaQuizTitles();
         $this->_f3->set('titles', $title);
-//        var_dump($title);
-//        foreach ($title as $x => $titles) {
-//            echo " ". $x . $titles;
-//        }
 
 
         // Display the add choice view page
