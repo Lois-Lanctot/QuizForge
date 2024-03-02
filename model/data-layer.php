@@ -4,7 +4,8 @@
 //Require the file that contains DB config
 require ($_SERVER['DOCUMENT_ROOT'].'/../config.php');
 
-class QuizDataLayer {
+class QuizDataLayer
+{
 
     /**
      * @var PDO the database connection object
@@ -98,7 +99,8 @@ class QuizDataLayer {
 
 
 
-    function getTriviaQuizTitles() {
+    function getTriviaQuizTitles()
+    {
 
         //SELECT Query
         //1.
@@ -121,7 +123,8 @@ class QuizDataLayer {
 
 
 
-    function addTriviaQuiz($tOrP) {
+    function addTriviaQuiz($tOrP)
+    {
         // the method also generates a unique key and saves it to an array in data-layer
 
         //  you'll eventually send the array to the getTriviaQuiz page method
