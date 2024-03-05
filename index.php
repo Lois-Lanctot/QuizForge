@@ -28,11 +28,8 @@ $f3->route('GET /', 'QuizController->home');
 $f3->route('GET /addChoice', 'QuizController->addChoice');
 $f3->route('GET|POST /addTriviaTitle', 'QuizController->addTriviaTitle');
 $f3->route('GET|POST /addTriviaQuestions', 'QuizController->addTriviaQuestions');
-$f3->route('GET|POST /addPersonalityTitle', 'QuizController->addPersonalityTitle');
-$f3->route('GET|POST /addPersonalityQuestions', 'QuizController->addPersonalityQuestions');
 
 $f3->route('GET /selectTrivia', 'QuizController->selectTrivia');
-$f3->route('GET /selectPersonality', 'QuizController->selectPersonality');
 
 
 

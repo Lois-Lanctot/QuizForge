@@ -3,7 +3,7 @@
     File: home.php
     Description: QuizForge home page
 -->
-<include href="views/header.html"></include>
+<include href="views/header_template.html"></include>
 
 <!-- Main Content -->
 <div class="container-fluid mt-5">
@@ -17,12 +17,6 @@
     </div>
 
     <div class="row mt-4">
-        <!-- Personality Quizzes -->
-        <div class="col-md-4">
-            <a href="#" class="d-block">
-                <div class="box text-center box1">Personality Quizzes</div>
-            </a>
-        </div>
         <!-- Create a Quiz -->
         <div class="col-md-4">
             <a href="addChoice" class="d-block">

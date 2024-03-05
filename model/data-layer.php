@@ -16,7 +16,6 @@ class QuizDataLayer
     private $_dbh;
 
 
-
     /**
      * constructor for the QuizDataLayer
      */
@@ -55,7 +54,4 @@ class QuizDataLayer
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
-
-
-
 }
