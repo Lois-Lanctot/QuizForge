@@ -23,11 +23,10 @@ class Quiz
     /**
      * constructor for the Quiz object
      */
-    function __construct()
+    function __construct($_quiz_title, $_quiz_desc)
     {
-        $this->_quiz_title = "";
-        $this->_quiz_desc = "";
-        $this->_questions = [];
+        $this->_quiz_title = $_quiz_title;
+        $this->_quiz_desc = $_quiz_desc;
     }
 
 
@@ -52,43 +51,68 @@ class Quiz
 
 
 
-//$title = "Sample Question?";
-
-//$options = [
-//1 => [
-//'title' => "Option 1.",
-//'result' => true,
-//],
-//2 => [
-//'title' => "Option 2.",
-//'result' => false,
-//],
-    // Add more options as needed
-//];
-// Call the setQuestions method with the provided title and options array
-//setQuestions($title, $options);
-
     /**
      * Setter for the quiz questions
-     * @param string $title question title
-     * @param mixed $options associative array of option names and results
+     * @param array $questionsData an array of questions with titles, options, and results
+     *                              Example structure:
+     *                              [
+     *                                  [1 => ['title' => 'title 1', 'options' => ['Option 1', 'Option 2'], 'results' => [true, false]]],
+     *                                  [2 => ['title' => 'title 2', 'options' => ['Option A', 'Option B'], 'results' => [false, true]]],
+     *                                  // etc
+     *                              ]
      */
-    function setQuestions($title, $options)
+    function setQuestions($questionsData)
     {
-        // Create a new associative array for the questions
-        $this->_questions = [
-            'title' => $title,
-            'options' => [],
-        ];
+        $questionsArray = [];
 
-        foreach ($options as $key => $value) {
-            // Add each option as an associative array to the 'options' array
-            $this->_questions['options'][$key] = [
-                'name' => $value['string'], // Assuming 'string' is the key for the string in the $options array
-                'value' => $value['boolean'], // Assuming 'boolean' is the key for the boolean in the $options array
-            ];
+        foreach ($questionsData as $questionItem) {
+            foreach ($questionItem as $questionIndex => $questionData) {
+                $questionTitle = $questionData['title'];
+                $options = $questionData['options'];
+                $results = $questionData['results'];
+
+                $questionArray = [
+                    $questionIndex => [
+                        'title' => $questionTitle,
+                        'options' => $options,
+                        'results' => $results,
+                    ],
+                ];
+
+                $questionsArray[] = $questionArray;
+            }
         }
+
+        $this->_questions = $questionsArray;
     }
+
+
+
+    /**
+     * @return string
+     */
+    public function getQuizTitle()
+    {
+        return $this->_quiz_title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQuizDesc()
+    {
+        return $this->_quiz_desc;
+    }
+
+    /**
+     * @return array
+     */
+    public function getQuestions()
+    {
+        return $this->_questions;
+    }
+
+
 
 
 

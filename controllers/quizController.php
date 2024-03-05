@@ -84,12 +84,9 @@ class QuizController
             // If there are no errors
             if (empty($this->_f3->get('errors'))) {
 
-                //instantiate DataLayer object
-                $data_layer = new QuizDataLayer();
-
-                // Send title and desc to data-layer to add data to the database
-                $data_layer->setQuizTitle($_POST['title']);
-                $data_layer->setQuizDesc($_POST['desc']);
+                //instantiate new Quiz object
+                $quiz = new Quiz($_POST['title'], $_POST['desc']);
+                $this->_f3->set('SESSION.quiz', $quiz);
 
                 $this->_f3->reroute('/addTriviaQuestions');
             }
@@ -107,50 +104,61 @@ class QuizController
      */
     function addTriviaQuestions()
     {
-        // Handle POST request to add personality title
+        // Handle POST request to add trivia questions
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // TODO: Validate questions
 
-            // If there are no errors
+            // get the quiz object from the session
+            $quiz = $this->_f3->get('SESSION.quiz');
+
+            // prepare questions to be sent to the data-layer to set questions
+            $questionsData = [];
+
+            $questionIndex = 1;
+            while (isset($_POST['question_title' . $questionIndex])) {
+                $questionTitle = $_POST['question_title' . $questionIndex];
+                $options = [];
+                $results = [];
+
+                $optionIndex = 1;
+                while (isset($_POST['question' . $questionIndex . '_text' . $optionIndex])) {
+                    $optionTitle = $_POST['question' . $questionIndex . '_text' . $optionIndex];
+                    $options[] = $optionTitle;
+
+                    $results[] = isset($_POST['question' . $questionIndex . '_radio' . $optionIndex]);
+
+                    $optionIndex++;
+                }
+
+                // add the question to the questionsData array
+                $questionsData[] = [
+                    $questionIndex => [
+                        'title' => $questionTitle,
+                        'options' => $options,
+                        'results' => $results,
+                    ],
+                ];
+
+                $questionIndex++;
+            }
+
+                // TODO: Validate questions
+
+
             if (empty($this->_f3->get('errors'))) {
+                // put questions in the quiz object
+                $quiz->setQuestions($questionsData);
 
-                // Instantiate DataLayer object
-                $data_layer = new QuizDataLayer();
+                echo "<pre>";
+                var_dump($quiz->getQuizTitle());
+                var_dump($quiz->getQuizDesc());
+                var_dump($quiz->getQuestions());
+                echo "</pre>";
 
-                // TODO: prepare questions to be sent to the data-layer to set questions
-
-
-                // set questions
-//                $data_layer->setQuestions($_POST['question']);
-
-//                $this->_f3->reroute('/addChoice');
-
-//                var_dump($_POST['question1_text1']);
-//                var_dump($_POST['question_title1']);
-
-                // radio button stuff
-//                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//                    if (isset($_POST['question1_radio1'])) {
-//                        $selectedOption = $_POST['question1_radio1'];
-//
-//                        if ($selectedOption == 'option1') {
-//                            echo "Option 1 (question1Radio1) was selected.";
-//                        } elseif ($selectedOption == 'option2') {
-//                            echo "Option 2 (question1Radio2) was selected.";
-//                        } else {
-//                            echo "Unknown option selected.";
-//                        }
-//                    } else {
-//                        echo "No option selected.";
-//                    }
-//                }
-
-
-
+//                $this->_f3->reroute('/selectTrivia');
             }
         }
 
-        // Display the add personality title view page
+        // Display the add trivia questions view page
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_questions.html');
     }
@@ -223,10 +231,6 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/personality/personality_questions.html');
     }
-
-
-
-
 
     function selectPersonality()
     {
