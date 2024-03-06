@@ -25,7 +25,7 @@ class QuizController
     {
         // Display the home view page
         $view = new Template();
-        echo $view->render('views/home.php');
+        echo $view->render('views/home.html');
     }
 
 
@@ -35,7 +35,6 @@ class QuizController
      */
     function selectTrivia()
     {
-
         $title = $GLOBALS['dataLayer']->getTriviaQuizTitles();
         $this->_f3->set('titles', $title);
 
@@ -54,7 +53,7 @@ class QuizController
     {
         // Display the add choice view page
         $view = new Template();
-        echo $view->render('views/add/choice/choice.php');
+        echo $view->render('views/add/choice/choice.html');
     }
 
 
@@ -67,7 +66,7 @@ class QuizController
         // Handle POST request to add trivia title
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Validate
-            if (!validQuizTitle($_POST['title'])) {
+            if (!validTitle($_POST['title'])) {
                 $this->_f3->set('errors["quiz_title"]', "Invalid Quiz Title");
             }
             if (strlen($_POST['title']) > 255) {
@@ -142,6 +141,11 @@ class QuizController
             }
 
                 // TODO: Validate questions
+            $valid = validQuestions($questionsData);
+            if (!$valid[0]) {
+                $this->_f3->set('errors["quiz_questions]', ($valid[1]." for ".$valid[2]));
+            }
+
 
 
             if (empty($this->_f3->get('errors'))) {
@@ -162,4 +166,6 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_questions.html');
     }
+
+
 }
