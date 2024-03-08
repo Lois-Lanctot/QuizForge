@@ -103,7 +103,6 @@ class QuizController
      */
     function addTriviaQuestions()
     {
-        // Handle POST request to add trivia questions
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // get the quiz object from the session
@@ -140,32 +139,53 @@ class QuizController
                 $questionIndex++;
             }
 
-                // TODO: Validate questions
+            // validate questions
             $valid = validQuestions($questionsData);
             if (!$valid[0]) {
-                $this->_f3->set('errors["quiz_questions]', ($valid[1]." for ".$valid[2]));
+                $this->_f3->set('errors["quiz_questions"]', $valid[1]);
+                $this->_f3->set('errors["quiz_questions_errors"]', $valid[2]);
             }
-
-
 
             if (empty($this->_f3->get('errors'))) {
-                // put questions in the quiz object
+                // if there are no errors
+
                 $quiz->setQuestions($questionsData);
 
-                echo "<pre>";
-                var_dump($quiz->getQuizTitle());
-                var_dump($quiz->getQuizDesc());
-                var_dump($quiz->getQuestions());
-                echo "</pre>";
+//                echo "<pre>";
+//                var_dump($quiz->getQuizTitle());
+//                var_dump($quiz->getQuizDesc());
+//                var_dump($quiz->getQuestions());
+//                echo "</pre>";
 
-//                $this->_f3->reroute('/selectTrivia');
+                 $this->_f3->reroute('/addConfirmation');
             }
+
         }
 
         // Display the add trivia questions view page
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_questions.html');
     }
+
+
+
+
+
+    /**
+     * sets up the route for the confirmation page
+     * @return void
+     */
+    function addConfirmation()
+    {
+        // add quiz to the database
+        $quiz = $this->_f3->get('SESSION.quiz');
+        $quiz->addQuizToFile($quiz);
+
+        // Display the add choice view page
+        $view = new Template();
+        echo $view->render('views/add/confirmation.html');
+    }
+
 
 
 }

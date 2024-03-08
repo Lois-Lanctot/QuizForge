@@ -27,27 +27,42 @@ function validDesc($desc)
     return strlen($desc) <= 255 && preg_match('/^[a-zA-Z0-9\s.,?!\'"-]+$/', $desc);
 }
 
-
 /**
- * validates the quiz questions form fields array
+ * Validates the quiz questions form fields array
  * @param $questions array an array of questions, options, and results
  * Example structure:
- *                               [
- *                                   [1 => ['title' => 'title 1', 'options' => ['Option 1', 'Option 2'], 'results' => [true, false]]],
- *                                   [2 => ['title' => 'title 2', 'options' => ['Option A', 'Option B'], 'results' => [false, true]]],
- *                                   // etc
- *                               ]
- * @return array
+ * [
+ *     [1 => ['title' => 'title 1', 'options' => ['Option 1', 'Option 2'], 'results' => [true, false]]],
+ *     [2 => ['title' => 'title 2', 'options' => ['Option A', 'Option B'], 'results' => [false, true]]],
+ * ]
+ * @return array [bool, string, mixed] Returns an array with the first element indicating validity,
+ *                                     the second element containing an error message if invalid,
+ *                                     and the third element containing the specific invalid data.
  */
 function validQuestions($questions) {
-    // cycle through q options - check the results while you're cycling through the options
-    // call validTitle on the option text
     foreach ($questions as $question) {
-//        if (!validTitle($question['title'])) {
-//            return [false, "Invalid Question Title", $question["title"]];
-//        }
+        foreach ($question as $questionIndex => $questionData) {
+            // validate question title
+            if (!validTitle($questionData['title'])) {
+                return [false, "Invalid Question Title", $questionData['title']];
+            }
 
+            // validate options
+            foreach ($questionData['options'] as $option) {
+                if (!validTitle($option)) {
+                    return [false, "Invalid Option Title", $option];
+                }
+            }
+
+            // validate results
+            if (!in_array(true, $questionData['results'])) {
+                return [false, "At least one correct result must be selected", $questionData['results']];
+            }
+
+        }
     }
 
     return [true, "Valid Questions", "Valid Questions"];
 }
+
+

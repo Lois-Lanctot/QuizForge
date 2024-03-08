@@ -162,3 +162,19 @@ input[type=radio]:checked {
     border-radius: 10px;
     margin-top: 2%;
 }
+
+
+.q-error {
+    background-color: #f7e1d7;
+    border-radius: 10px;
+}
+
+
+.confirm {
+    background-color: #f7e1d7;
+    border-radius: 10px;
+}
+
+.link {
+    font-size: 20px;
+ }

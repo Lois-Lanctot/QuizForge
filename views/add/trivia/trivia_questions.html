@@ -6,6 +6,14 @@
 <include href="views/header_template.html"></include>
 
 <!-- Main Content -->
+<check if="{{ isset(@errors['quiz_questions']) }}">
+    <div class="row m-4 p-2 q-error">
+        <p class="err">{{ @errors['quiz_questions'] }}</p>
+        <p class="err">{{ @errors['quiz_questions_errors'] }}</p>
+    </div>
+</check>
+
+
 <section id="quizForm">
     <div class="row mt-4">
         <div class="col-md-12">

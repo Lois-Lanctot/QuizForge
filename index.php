@@ -30,6 +30,7 @@ $f3->route('GET|POST /addTriviaTitle', 'QuizController->addTriviaTitle');
 $f3->route('GET|POST /addTriviaQuestions', 'QuizController->addTriviaQuestions');
 
 $f3->route('GET /selectTrivia', 'QuizController->selectTrivia');
+$f3->route('GET /addConfirmation', 'QuizController->addConfirmation');
 
 
 

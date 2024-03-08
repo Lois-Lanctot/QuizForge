@@ -116,24 +116,60 @@ class Quiz
 
 
 
-
     /**
      * Adds a quiz to the database
      * @return void
      */
-    function addQuiz()
+    function addQuizToFile()
     {
-        // the method also generates a unique key and saves it to an array in data-layer
+        // Check if any of the fields are blank
+        if (empty($this->_quiz_title) || empty($this->_quiz_desc) || empty($this->_questions)) {
+            // Handle error or return an error message
+            // For example, you might throw an exception or set an error flag.
+            // For simplicity, I'm echoing an error message.
+            echo "Error: Quiz title, description, and questions must be provided.";
+            return;
+        }
 
-        //  you'll eventually send the array to the getTriviaQuiz page method
-        //      there's a part in the html display pages that will 'include' a php page (A)
-        //       (A) will use echo statements to display the data...
-        //               using a method in data-layer that somehow sends the data
+        try {
+            // Create an array to store SQL statements
+            $sqlStatements = [];
 
+            // Insert quiz into t_quiz table
+            $sqlStatements[] = "INSERT INTO t_quiz (title, description) VALUES ('{$this->_quiz_title}', '{$this->_quiz_desc}')";
 
-        //check if any of the fields are blank, if they are you can't add the Quiz
-        //if there's stuff in the variables, add a new quiz to the database
+            // Get the last inserted quiz ID
+            $quizId = count($sqlStatements) + 1;
+
+            // Insert questions and options into t_questions and t_options tables
+            foreach ($this->_questions as $question) {
+                // Insert question into t_questions table
+                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title) VALUES ($quizId, '{$question['title']}')";
+
+                // Get the last inserted question ID
+                $questionId = count($sqlStatements) + 1;
+
+                // Insert options into t_options table
+                foreach ($question['options'] as $optionIndex => $optionTitle) {
+                    $result = $question['results'][$optionIndex] ? 1 : 0;
+                    $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
+                }
+            }
+
+            // Write SQL statements to a file
+            $fileContent = implode(";\n", $sqlStatements) . ';';
+
+            file_put_contents('trivia.sql', $fileContent);
+
+            echo "SQL statements written to trivia.sql successfully!";
+        }
+        catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
+
+
+
 
 
 }
