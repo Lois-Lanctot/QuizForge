@@ -179,7 +179,7 @@ class QuizController
     {
         // add quiz to the database
         $quiz = $this->_f3->get('SESSION.quiz');
-        $quiz->addQuizToFile($quiz);
+        $quiz->addQuizToFile();
 
         // Display the add choice view page
         $view = new Template();

@@ -65,18 +65,16 @@ class Quiz
     {
         $questionsArray = [];
 
-        foreach ($questionsData as $questionItem) {
-            foreach ($questionItem as $questionIndex => $questionData) {
-                $questionTitle = $questionData['title'];
-                $options = $questionData['options'];
-                $results = $questionData['results'];
+        foreach ($questionsData as $questionData) {
+            foreach ($questionData as $questionIndex => $questionDetails) {
+                $questionTitle = $questionDetails['title'];
+                $options = $questionDetails['options'];
+                $results = $questionDetails['results'];
 
                 $questionArray = [
-                    $questionIndex => [
-                        'title' => $questionTitle,
-                        'options' => $options,
-                        'results' => $results,
-                    ],
+                    'title' => $questionTitle,
+                    'options' => $options,
+                    'results' => $results,
                 ];
 
                 $questionsArray[] = $questionArray;
@@ -120,6 +118,10 @@ class Quiz
      * Adds a quiz to the database
      * @return void
      */
+    /**
+     * Adds a quiz to the database
+     * @return void
+     */
     function addQuizToFile()
     {
         // Check if any of the fields are blank
@@ -139,36 +141,75 @@ class Quiz
             $sqlStatements[] = "INSERT INTO t_quiz (title, description) VALUES ('{$this->_quiz_title}', '{$this->_quiz_desc}')";
 
             // Get the last inserted quiz ID
-            $quizId = count($sqlStatements) + 1;
+            $quizId = count($sqlStatements);
 
-            // Insert questions and options into t_questions and t_options tables
+            // Loop through each question
             foreach ($this->_questions as $question) {
                 // Insert question into t_questions table
-                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title) VALUES ($quizId, '{$question['title']}')";
+                if (array_key_exists('title', $question)) {
+                    // Access the 'title' key if it exists
+                    $questionTitle = $question['title'];
+                    $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title) VALUES ($quizId, '{$questionTitle}')";
 
-                // Get the last inserted question ID
-                $questionId = count($sqlStatements) + 1;
+                    // Get the last inserted question ID
+                    $questionId = count($sqlStatements);
 
-                // Insert options into t_options table
-                foreach ($question['options'] as $optionIndex => $optionTitle) {
-                    $result = $question['results'][$optionIndex] ? 1 : 0;
-                    $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
+                    // Loop through each option
+                    if (array_key_exists('options', $question) && array_key_exists('results', $question)) {
+                        foreach ($question['options'] as $optionIndex => $optionTitle) {
+                            $result = $question['results'][$optionIndex] ? 1 : 0;
+                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
+                        }
+                    } else {
+                        // Handle the case where 'options' or 'results' keys are not present
+                        echo "Error: 'options' or 'results' keys not found in a question data.";
+                    }
+                } else {
+                    // Handle the case where 'title' key is not present
+                    echo "Error: 'title' key not found in a question data.";
                 }
             }
 
             // Write SQL statements to a file
-            $fileContent = implode(";\n", $sqlStatements) . ';';
-
-            file_put_contents('trivia.sql', $fileContent);
+            foreach ($sqlStatements as $sqlStatement) {
+                $this->writeSqlToFile($sqlStatement);
+            }
 
             echo "SQL statements written to trivia.sql successfully!";
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
 
+
+
+
+    function writeSqlToFile($sqlStatement)
+    {
+
+        try {
+            // Open the file in append mode (creates the file if it doesn't exist)
+            $fileHandle = fopen('trivia.sql', 'a');
+
+            if ($fileHandle === false) {
+                throw new Exception("Unable to open file: trivia.sql");
+            }
+
+            // Write the SQL statement to the file
+            fwrite($fileHandle, $sqlStatement . ";\n");
+
+            // Close the file handle
+            fclose($fileHandle);
+
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+//        $fileContent = file_get_contents('trivia.sql');
+//        echo $fileContent;
+
+    }
 
 
 
