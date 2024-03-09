@@ -65,11 +65,12 @@ class Quiz
     {
         $questionsArray = [];
 
-        foreach ($questionsData as $questionData) {
-            foreach ($questionData as $questionIndex => $questionDetails) {
-                $questionTitle = $questionDetails['title'];
-                $options = $questionDetails['options'];
-                $results = $questionDetails['results'];
+        foreach ($questionsData as $questionIndex => $questionData) {
+            if (is_array($questionData) && array_key_exists('title', $questionData)) {
+                $questionTitle = $questionData['title'];
+                $options = isset($questionData['options']) ? $questionData['options'] : [];
+                $results = isset($questionData['results']) ? $questionData['results'] : [];
+
 
                 $questionArray = [
                     'title' => $questionTitle,
@@ -78,11 +79,15 @@ class Quiz
                 ];
 
                 $questionsArray[] = $questionArray;
+            } else {
+                // Handle the case where $questionData is not an array or doesn't have a 'title' key
+                echo "Error: Invalid data structure for a question.";
             }
         }
 
         $this->_questions = $questionsArray;
     }
+
 
 
 
@@ -103,7 +108,7 @@ class Quiz
     }
 
     /**
-     * @return array
+     * @return int|string
      */
     public function getQuestions()
     {
@@ -122,10 +127,10 @@ class Quiz
      * Adds a quiz to the database
      * @return void
      */
-    function addQuizToFile()
+    function addQuizToFile($questionsData)
     {
         // Check if any of the fields are blank
-        if (empty($this->_quiz_title) || empty($this->_quiz_desc) || empty($this->_questions)) {
+        if (empty($this->_quiz_title) || empty($this->_quiz_desc) || empty($questionsData)) {
             // Handle error or return an error message
             // For example, you might throw an exception or set an error flag.
             // For simplicity, I'm echoing an error message.
@@ -144,10 +149,11 @@ class Quiz
             $quizId = count($sqlStatements);
 
             // Loop through each question
-            foreach ($this->_questions as $question) {
+            foreach ($questionsData as $question) {
                 // Insert question into t_questions table
                 if (array_key_exists('title', $question)) {
                     // Access the 'title' key if it exists
+                    // TODO:
                     $questionTitle = $question['title'];
                     $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title) VALUES ($quizId, '{$questionTitle}')";
 
@@ -155,14 +161,9 @@ class Quiz
                     $questionId = count($sqlStatements);
 
                     // Loop through each option
-                    if (array_key_exists('options', $question) && array_key_exists('results', $question)) {
-                        foreach ($question['options'] as $optionIndex => $optionTitle) {
-                            $result = $question['results'][$optionIndex] ? 1 : 0;
-                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
-                        }
-                    } else {
-                        // Handle the case where 'options' or 'results' keys are not present
-                        echo "Error: 'options' or 'results' keys not found in a question data.";
+                    foreach ($question['options'] as $optionIndex => $optionTitle) {
+                        $result = $question['results'][$optionIndex] ? 1 : 0;
+                        $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
                     }
                 } else {
                     // Handle the case where 'title' key is not present

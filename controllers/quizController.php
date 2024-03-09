@@ -148,6 +148,8 @@ class QuizController
 
             if (empty($this->_f3->get('errors'))) {
                 // if there are no errors
+                $this->_f3->set('SESSION.quizData', $questionsData);
+
 
                 $quiz->setQuestions($questionsData);
 
@@ -179,7 +181,8 @@ class QuizController
     {
         // add quiz to the database
         $quiz = $this->_f3->get('SESSION.quiz');
-        $quiz->addQuizToFile();
+
+        $quiz->addQuizToFile($this->_f3->get('SESSION.quizData'));
 
         // Display the add choice view page
         $view = new Template();
