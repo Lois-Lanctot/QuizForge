@@ -124,54 +124,77 @@ class Quiz
     function addQuizToFile($questionsData)
     {
         if (empty($this->_quiz_title) || empty($this->_quiz_desc) || empty($questionsData)) {
-            // if any of the fields are blank
+            // If any of the fields are blank
             echo "One of the fields is blank.";
             return;
         }
 
         try {
-            // array for SQL statements
+            // Array for SQL statements
             $sqlStatements = [];
 
-            // insert SQL statement for quiz title + description
-            $sqlStatements[] = "INSERT INTO t_quiz (title, description) VALUES ('{$this->_quiz_title}', '{$this->_quiz_desc}')";
+            // Get the new quiz index
+            $quizId = $this->getNewQuizIndex();
+            $questionId = $this->getNewQuestionIndex();
 
-            // get the previous quiz ID
-            $quizId = count($sqlStatements);
 
-            // iterate through each question
-            foreach ($questionsData as $question) {
+            // Insert SQL statement for quiz title + description
+            $sqlStatements[] = "INSERT INTO t_quiz (id, title, description) VALUES ('$quizId', '{$this->_quiz_title}', '{$this->_quiz_desc}')";
 
-                // insert SQL statement
-                $questionTitle = $question[1]['title'];
-                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title) VALUES ($quizId, '{$questionTitle}')";
+            // Count of questions
+            $questionCount = 0;
 
-                // get the last question ID
-                $questionId = count($sqlStatements);
+            // Iterate through each question
+            foreach ($questionsData as $questionIndex => $question) {
 
-                // loop through each option and result to add to table
-                foreach ($question[1]['options'] as $optionIndex => $optionTitle) {
-                    $result = $question[1]['results'][$optionIndex] ? 1 : 0;
+                // Insert SQL statement for each question
+                $questionTitle = $question[$questionIndex + 1]['title'];
+                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('$quizId', '{$questionTitle}', " . $questionId . ")";
 
-                    // insert SQL statement
-                    $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ($questionId, '{$optionTitle}', $result)";
+                // Loop through each option and result to add to the table
+                foreach ($question[$questionIndex + 1]['options'] as $optionIndex => $optionTitle) {
+                    $questionId = $this->getNewQuestionIndex();
+
+                    // Check if the option is selected in results
+                    $resultValue = isset($question[$questionIndex + 1]['results'][$optionIndex]) ? $question[$questionIndex + 1]['results'][$optionIndex] : null;
+
+                    // Debugging output
+                    echo "Question: $questionCount, Option: $optionTitle, Result: $resultValue, IsCorrect: ";
+
+                    // Check if the result is set and not empty
+                    if ($resultValue !== null && $resultValue !== '') {
+                        $isCorrect = ($resultValue == "1") ? 1 : 0; // Existing logic
+
+                        // If there should be only one correct answer, update the logic
+                        if ($isCorrect) {
+                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionId', '{$optionTitle}', 1)";
+                        } else {
+                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionId', '{$optionTitle}', 0)";
+                        }
+
+                        // Debugging output (continue)
+                        echo "$isCorrect<br>";
+                    } else {
+                        // Debugging output (continue)
+                        echo "<br>";
+                    }
                 }
-
             }
 
-            // write SQL statements to trivia.sql to be run manually
+            // Write SQL statements to trivia.sql to be run manually
             foreach ($sqlStatements as $sqlStatement) {
-                 $this->writeSqlToFile($sqlStatement);
+                $this->writeSqlToFile($sqlStatement);
             }
-
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
-
-
-
     }
+
+
+
+
+
+
 
 
     /**
@@ -203,6 +226,43 @@ class Quiz
 
 
     }
+
+
+    function getNewQuizIndex() {
+        $file = 'trivia.sql';
+        $index = 0;
+
+        $sqlStatements = file($file, FILE_IGNORE_NEW_LINES);
+
+        foreach ($sqlStatements as $sqlStatement) {
+            // Check if the line starts with the desired pattern
+            if (strpos($sqlStatement, 'INSERT INTO t_quiz') === 0) {
+                $index++;
+            }
+
+        }
+
+        return $index; // Return 0 if no match is found
+    }
+
+    function getNewQuestionIndex() {
+        $file = 'trivia.sql';
+        $index = 0;
+
+        $sqlStatements = file($file, FILE_IGNORE_NEW_LINES);
+
+        foreach ($sqlStatements as $sqlStatement) {
+            // Check if the line starts with the desired pattern
+            if (strpos($sqlStatement, 'INSERT INTO t_questions') === 0) {
+                $index++;
+            }
+
+        }
+
+        return $index; // Return 0 if no match is found
+    }
+
+
 
 
 
