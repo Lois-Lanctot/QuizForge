@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS t_quiz, t_questions, `t_options`, t_results;
 
 
 -- Trivia Tables
+-- trivia.php can be found on the cpanel accounts
 
 -- Create the 't_quiz' table
 CREATE TABLE t_quiz (
