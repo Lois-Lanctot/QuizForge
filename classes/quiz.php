@@ -142,18 +142,17 @@ class Quiz
             $sqlStatements[] = "INSERT INTO t_quiz (id, title, description) VALUES ('$quizId', '{$this->_quiz_title}', '{$this->_quiz_desc}')";
 
             // Count of questions
-            $questionCount = 0;
+            $questionCount = $questionId;
 
             // Iterate through each question
             foreach ($questionsData as $questionIndex => $question) {
 
                 // Insert SQL statement for each question
                 $questionTitle = $question[$questionIndex + 1]['title'];
-                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('$quizId', '{$questionTitle}', " . $questionId . ")";
+                $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('$quizId', '{$questionTitle}', " . $questionCount. ")";
 
                 // Loop through each option and result to add to the table
                 foreach ($question[$questionIndex + 1]['options'] as $optionIndex => $optionTitle) {
-                    $questionId = $this->getNewQuestionIndex();
 
                     // Check if the option is selected in results
                     $resultValue = isset($question[$questionIndex + 1]['results'][$optionIndex]) ? $question[$questionIndex + 1]['results'][$optionIndex] : null;
@@ -167,18 +166,22 @@ class Quiz
 
                         // If there should be only one correct answer, update the logic
                         if ($isCorrect) {
-                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionId', '{$optionTitle}', 1)";
+                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionCount', '{$optionTitle}', 1)";
                         } else {
-                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionId', '{$optionTitle}', 0)";
+                            $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionCount', '{$optionTitle}', 0)";
                         }
 
                         // Debugging output (continue)
                         echo "$isCorrect<br>";
-                    } else {
+                    }
+                    else {
                         // Debugging output (continue)
                         echo "<br>";
                     }
+
                 }
+                $questionCount++;
+
             }
 
             // Write SQL statements to trivia.sql to be run manually
@@ -258,7 +261,7 @@ class Quiz
             }
 
         }
-
+        echo $index;
         return $index; // Return 0 if no match is found
     }
 

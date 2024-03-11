@@ -1,1 +1,14 @@
-
+INSERT INTO t_quiz (id, title, description) VALUES ('0', 'rgva', 'sa');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('0', ' seg', 0);
+INSERT INTO t_options (id, name, result) VALUES ('0', ' ds', 1);
+INSERT INTO t_options (id, name, result) VALUES ('0', ' df', 0);
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('0', '  yhdr', 1);
+INSERT INTO t_options (id, name, result) VALUES ('1', ' fsd', 0);
+INSERT INTO t_options (id, name, result) VALUES ('1', ' sf', 1);
+INSERT INTO t_quiz (id, title, description) VALUES ('1', 'rgva', 'sa');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('1', ' seg', 2);
+INSERT INTO t_options (id, name, result) VALUES ('2', ' ds', 1);
+INSERT INTO t_options (id, name, result) VALUES ('2', ' df', 0);
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('1', '  yhdr', 3);
+INSERT INTO t_options (id, name, result) VALUES ('3', ' fsd', 0);
+INSERT INTO t_options (id, name, result) VALUES ('3', ' sf', 1);
