@@ -56,35 +56,36 @@
         </div>
     </div>
     <script>
-        let questionCounter = 1;  // Initialize a counter for questions
-        let groupCounter = 1;      // Initialize a counter for question groups
+        let questionCounter = 1;
+        let groupCounter = 1;
 
         function addQuestion() {
-            // Increment the question and group counters
+            // increment counters
             questionCounter++;
             groupCounter++;
 
-            // Create a new div element for the question
+            // add new div element for the question
             let newQuestionDiv = document.createElement('div');
             newQuestionDiv.className = 'question';
 
-            // Copy the question title container
+            // copy the question title container
             let questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
 
-            // Update the id and label for the question title input
+            // update the id and label
             let questionTitleInput = questionTitleContainer.querySelector('.question-title');
             let questionTitleLabel = questionTitleContainer.querySelector('label');
 
             questionTitleInput.id = 'questionTitle' + questionCounter;
             questionTitleLabel.setAttribute('for', 'questionTitle' + questionCounter);
             questionTitleLabel.innerText = 'Question ' + questionCounter + ' Title:';
-
-            // Increment the number in the name attribute of the question title input
             questionTitleInput.name = 'question_title' + questionCounter;
+
+            // clear the value of question title
+            questionTitleInput.value = '';
 
             newQuestionDiv.appendChild(questionTitleContainer);
 
-            // Create a new option container 1
+            // create a new option 1
             let optionContainer1 = document.createElement('div');
             optionContainer1.className = 'question-container ml-3';
             optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
@@ -93,7 +94,7 @@
 
             newQuestionDiv.appendChild(optionContainer1);
 
-            // Create a new option container 2
+            // create a new option 2
             let optionContainer2 = document.createElement('div');
             optionContainer2.className = 'question-container';
             optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
@@ -102,14 +103,12 @@
 
             newQuestionDiv.appendChild(optionContainer2);
 
-            // Create a new div element for the button
+            // div for the button
             let buttonContainer = document.createElement('div');
             buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption(this)">Add Option</button>';
-
-            // Append the button container to the new question div
             newQuestionDiv.appendChild(buttonContainer);
 
-            // Find the element with the class "questions" and append the new question div to it
+            // find the "questions" div and put the new question to the end
             let questionsContainer = document.querySelector('.questions');
             questionsContainer.appendChild(newQuestionDiv);
         }
@@ -118,20 +117,20 @@
             let currentQuestion = button.closest('.question');
 
             if (currentQuestion) {
-                // Count the number of existing options to determine the index for the new option
+                // determine the index for the new option
                 let existingOptions = currentQuestion.querySelectorAll('.question-container');
                 let newIndex = existingOptions.length + 1;
 
                 let newOptionContainer = document.createElement('div');
                 newOptionContainer.className = 'question-container';
 
-                // Get the question number from the current question title
+                // get the question number from the current question title
                 let questionTitleContainer = currentQuestion.querySelector('.question-title-container');
                 let questionTitleLabel = questionTitleContainer ? questionTitleContainer.querySelector('label') : null;
                 let questionNumber = questionTitleLabel ? questionTitleLabel.getAttribute('for').match(/\d+/) : '';
                 questionNumber = questionNumber ? questionNumber[0] : '';
 
-                // Create new input fields for the option
+                // new input fields for the option
                 let newOptionLabel = document.createElement('label');
                 newOptionLabel.setAttribute('for', `question${questionNumber}Option${newIndex}`);
                 newOptionLabel.textContent = 'Option Title:';
@@ -141,7 +140,7 @@
                 newOptionInput.type = 'text';
                 newOptionInput.name = `question${questionNumber}_text${newIndex}`;
                 newOptionInput.id = `question${questionNumber}Option${newIndex}`;
-                newOptionInput.placeholder = `Enter option title${newIndex}`;  // Incremented placeholder
+                newOptionInput.placeholder = `Enter option title${newIndex}`;
 
                 let newOptionRadio = document.createElement('input');
                 newOptionRadio.className = 'question-radio';
@@ -150,12 +149,12 @@
                 newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
                 newOptionRadio.value = `option${newIndex}`;
 
-                // Append the new input fields to the container
+                // add the new input fields to the container
                 newOptionContainer.appendChild(newOptionLabel);
                 newOptionContainer.appendChild(newOptionInput);
                 newOptionContainer.appendChild(newOptionRadio);
 
-                // Insert the new option container before the button's parent node
+                // insert the new option before the button
                 currentQuestion.insertBefore(newOptionContainer, button.parentNode);
             } else {
                 console.error('Error: Unable to find the parent question container.');

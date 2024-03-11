@@ -147,6 +147,7 @@ class Quiz
             // Iterate through each question
             foreach ($questionsData as $questionIndex => $question) {
 
+
                 // Insert SQL statement for each question
                 $questionTitle = $question[$questionIndex + 1]['title'];
                 $sqlStatements[] = "INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('$quizId', '{$questionTitle}', " . $questionCount. ")";
@@ -158,7 +159,7 @@ class Quiz
                     $resultValue = isset($question[$questionIndex + 1]['results'][$optionIndex]) ? $question[$questionIndex + 1]['results'][$optionIndex] : null;
 
                     // Debugging output
-                    echo "Question: $questionCount, Option: $optionTitle, Result: $resultValue, IsCorrect: ";
+                    echo "Option: $optionTitle, Result: $resultValue<br>";
 
                     // Check if the result is set and not empty
                     if ($resultValue !== null && $resultValue !== '') {
@@ -171,13 +172,8 @@ class Quiz
                             $sqlStatements[] = "INSERT INTO t_options (id, name, result) VALUES ('$questionCount', '{$optionTitle}', 0)";
                         }
 
-                        // Debugging output (continue)
-                        echo "$isCorrect<br>";
                     }
-                    else {
-                        // Debugging output (continue)
-                        echo "<br>";
-                    }
+
 
                 }
                 $questionCount++;
@@ -261,7 +257,6 @@ class Quiz
             }
 
         }
-        echo $index;
         return $index; // Return 0 if no match is found
     }
 
