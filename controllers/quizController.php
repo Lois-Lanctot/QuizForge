@@ -153,13 +153,13 @@ class QuizController
 
                 $quiz->setQuestions($questionsData);
 
-//                echo "<pre>";
-//                var_dump($quiz->getQuizTitle());
-//                var_dump($quiz->getQuizDesc());
-//                var_dump($quiz->getQuestions());
-//                echo "</pre>";
+                echo "<pre>";
+                var_dump($quiz->getQuizTitle());
+                var_dump($quiz->getQuizDesc());
+                var_dump($quiz->getQuestions());
+                echo "</pre>";
 
-                 $this->_f3->reroute('/addConfirmation');
+//                 $this->_f3->reroute('/addConfirmation');
             }
 
         }
@@ -183,7 +183,7 @@ class QuizController
         $quiz = $this->_f3->get('SESSION.quiz');
 
         $quiz->addQuizToFile($this->_f3->get('SESSION.quizData'));
-
+        $quiz->displayResultsAndOptions();
         // Display the add choice view page
         $view = new Template();
         echo $view->render('views/add/confirmation.html');

@@ -261,6 +261,34 @@ class Quiz
     }
 
 
+    public function displayResultsAndOptions()
+    {
+        if (empty($this->_questions)) {
+            echo "No questions available.";
+            return;
+        }
+
+        foreach ($this->_questions as $questionIndex => $question) {
+            echo "Question " . ($questionIndex + 1) . ":\n";
+            echo "Title: " . $question['title'] . "\n";
+
+            if (!empty($question['options'])) {
+                echo "Options:\n";
+                foreach ($question['options'] as $optionIndex => $option) {
+                    $result = isset($question['results'][$optionIndex]) ? $question['results'][$optionIndex] : false;
+                    echo "  - Option " . ($optionIndex + 1) . ": " . $option . " (Result: " . ($result ? 'Correct' : 'Incorrect') . ")\n";
+                }
+            } else {
+                echo "No options available for this question.\n";
+            }
+
+            echo "\n";
+        }
+    }
+
+
+
+
 
 
 
