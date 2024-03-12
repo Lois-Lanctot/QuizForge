@@ -37,4 +37,3 @@ INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (1,'Why have 
 INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (1,'What is this quiz for',3);
 
 INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (1, 'suffering',false);
-

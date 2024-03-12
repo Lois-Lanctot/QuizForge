@@ -53,7 +53,7 @@ class QuizController
     {
         // Display the add choice view page
         $view = new Template();
-        echo $view->render('views/add/choice/choice.html');
+        echo $view->render('views/add/choice.html');
     }
 
 
