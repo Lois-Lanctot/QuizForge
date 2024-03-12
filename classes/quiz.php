@@ -159,7 +159,7 @@ class Quiz
                     $resultValue = isset($question[$questionIndex + 1]['results'][$optionIndex]) ? $question[$questionIndex + 1]['results'][$optionIndex] : null;
 
                     // Debugging output
-                    echo "Option: $optionTitle, Result: $resultValue<br>";
+//                    echo "Option: $optionTitle, Result: $resultValue<br>";
 
                     // Check if the result is set and not empty
                     if ($resultValue !== null && $resultValue !== '') {
