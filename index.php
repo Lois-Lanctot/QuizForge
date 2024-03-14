@@ -25,7 +25,6 @@ $controller = new QuizController($f3);
 
 // Define routes using the controller functions
 $f3->route('GET /', 'QuizController->home');
-$f3->route('GET /addChoice', 'QuizController->addChoice');
 $f3->route('GET|POST /addTriviaTitle', 'QuizController->addTriviaTitle');
 $f3->route('GET|POST /addTriviaQuestions', 'QuizController->addTriviaQuestions');
 

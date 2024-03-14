@@ -54,17 +54,6 @@ class QuizController
     }
 
     /**
-     * sets up the route for the add choice page
-     * @return void
-     */
-    function addChoice()
-    {
-        // Display the add choice view page
-        $view = new Template();
-        echo $view->render('views/add/choice.html');
-    }
-
-    /**
      * sets up the route for the add quiz title page
      * @return void
      */
