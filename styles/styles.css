@@ -102,6 +102,17 @@ input[type=radio] {
 
 }
 
+input[type=radio].quiz-radio {
+    -webkit-appearance: none;
+    background-color: #ff8fcf;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: solid #2f2f2f 1px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
 input[type=radio]:checked {
     background: #58d29b;
 }
@@ -174,3 +185,28 @@ input[type=radio]:checked {
 .font_size {
     font-size: 20px;
  }
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #aad9e0;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.pink {
+    background-color: #ff8fcf;
+    color: #fff;
+    font-weight: bold;
+    width: 350px;
+    padding: 10px;
+}
+
+.pink:hover {
+    color: #676767;
+}

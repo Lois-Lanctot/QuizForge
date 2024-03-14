@@ -186,3 +186,50 @@ INSERT INTO t_quiz (id, title, description) VALUES ('43', 'x', 'x');
 INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('43', ''', 45);
 INSERT INTO t_options (id, name, result) VALUES ('45', 'c', 1);
 INSERT INTO t_options (id, name, result) VALUES ('45', 'crew', 0);
+
+-- Presentation Data
+INSERT INTO `t_quiz`( id, `title`, `description`) VALUES (43, 'True or False History Quiz','Select the correct history facts');
+
+INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (1,'When was the Great Wall of China built?',1);
+INSERT INTO `t_questions`(`quiz_id`, `title`, `options_id`) VALUES (2,'When did Green River College start?',2);
+
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (1, 'Last year',false);
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (1, '220 BC',true);
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (1, 'It never was',false);
+
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (2, '1945',true);
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (2, '1963',false);
+INSERT INTO `t_options`(`id`, `name`, `result`) VALUES (2, '1964',false);INSERT INTO t_quiz (id, title, description) VALUES ('44', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('44', 'When was the Great Wall of China built?', 46);
+INSERT INTO t_options (id, name, result) VALUES ('46', 'Last year', 1);
+INSERT INTO t_options (id, name, result) VALUES ('46', '220 BC', 0);
+INSERT INTO t_options (id, name, result) VALUES ('46', 'It never was', 0);
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('44', 'When did Green River College start?', 47);
+INSERT INTO t_options (id, name, result) VALUES ('47', '1945', 0);
+INSERT INTO t_options (id, name, result) VALUES ('47', '1963', 1);
+INSERT INTO t_options (id, name, result) VALUES ('47', '1964', 0);
+INSERT INTO t_quiz (id, title, description) VALUES ('44', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('44', 'When was the Great Wall of China built?', 48);
+INSERT INTO t_options (id, name, result) VALUES ('48', 'Last year', 1);
+INSERT INTO t_options (id, name, result) VALUES ('48', '220 BC', 0);
+INSERT INTO t_options (id, name, result) VALUES ('48', 'It never was', 0);
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('44', 'When did Green River College start?', 49);
+INSERT INTO t_options (id, name, result) VALUES ('49', '1945', 0);
+INSERT INTO t_options (id, name, result) VALUES ('49', '1963', 1);
+INSERT INTO t_options (id, name, result) VALUES ('49', '1964', 0);
+INSERT INTO t_quiz (id, title, description) VALUES ('45', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('45', 'a', 50);
+INSERT INTO t_options (id, name, result) VALUES ('50', 'a', 1);
+INSERT INTO t_options (id, name, result) VALUES ('50', 'a', 0);
+INSERT INTO t_quiz (id, title, description) VALUES ('46', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('46', 'a', 51);
+INSERT INTO t_options (id, name, result) VALUES ('51', 'a', 1);
+INSERT INTO t_options (id, name, result) VALUES ('51', 'a', 0);
+INSERT INTO t_quiz (id, title, description) VALUES ('47', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('47', 'a', 52);
+INSERT INTO t_options (id, name, result) VALUES ('52', 'a', 1);
+INSERT INTO t_options (id, name, result) VALUES ('52', 'a', 0);
+INSERT INTO t_quiz (id, title, description) VALUES ('48', 'True or False History Quiz', 'Select the correct history fact');
+INSERT INTO t_questions (quiz_id, title, options_id) VALUES ('48', 'a', 53);
+INSERT INTO t_options (id, name, result) VALUES ('53', 'a', 1);
+INSERT INTO t_options (id, name, result) VALUES ('53', 'a', 0);

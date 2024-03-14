@@ -10,27 +10,90 @@
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
         <div class="col-12 text-center" id="color-box">
-            <h4>Quiz Title: True or False!</h4>
-            <p>Description: This quiz is a two truths and a lie quiz. Try and figure out which of these didn't really happen.</p>
+            <h1>True or False History Quiz</h1>
+            <p>Select the correct history facts</p>
         </div>
     </div>
 
     <!-- Display quiz questions and options -->
-    <div class="row mt-4">
-        <repeat group="{{ @quizData.questions }}" value="{{ @question }}">
-            <div class="col-md-8 offset-md-2 mb-4">
-                <div class="box text-center box1 p-4">
-                    <h5>{{ @question.question }}</h5>
-                    <ul>
-                        <repeat group="{{ @question.options }}" value="{{ @option }}">
-                            <li>{{ @option }}</li>
-                        </repeat>
-                    </ul>
-                </div>
+    <div class="row mt-4" id="quiz-container">
+        <div class="col-md-4 offset-md-4 mb-4">
+            <div class="box1 p-3 rounded">
+                <h3 class="text-center">When was the Great Wall of China built?</h3>
+                <ul class="list-unstyled quiz-options">
+                    <li class="mb-2">
+                        <label class="mb-0">Last year</label>
+                        <input type="radio" name="question1" value="last-year" class="quiz-radio mr-2">
+                    </li>
+                    <li class="mb-2">
+                        <label class="mb-0">220 BC</label>
+                        <input type="radio" name="question1" value="220BC" class="quiz-radio mr-2">
+                    </li>
+                    <li>
+                        <label class="mb-0">It never was</label>
+                        <input type="radio" name="question1" value="never-was" class="quiz-radio mr-2">
+                    </li>
+                </ul>
             </div>
-        </repeat>
+        </div>
+        <div class="col-md-4 offset-md-4 mb-4">
+            <div class="box1 p-3 rounded">
+                <h3 class="text-center">When did Green River College start?</h3>
+                <ul class="list-unstyled quiz-options">
+                    <li class="mb-2">
+                        <label class="mb-0">1945</label>
+                        <input type="radio" name="question2" value="1945" class="quiz-radio mr-2">
+                    </li>
+                    <li class="mb-2">
+                        <label class="mb-0">1963</label>
+                        <input type="radio" name="question2" value="1963" class="quiz-radio mr-2">
+                    </li>
+                    <li class="mb-2">
+                        <label class="mb-0">1964</label>
+                        <input type="radio" name="question2" value="1964" class="quiz-radio mr-2">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <button class="pink rounded-pill" onclick="submitQuiz()">Submit Quiz</button>
+        </div>
     </div>
 </div>
+
+<!-- JavaScript for quiz functionality -->
+<script>
+    function submitQuiz() {
+        // Retrieve user-selected answers
+        let answers = {
+            question1: document.querySelector('input[name="question1"]:checked').value,
+            question2: document.querySelector('input[name="question2"]:checked').value
+        };
+
+        // Define correct answers
+        let correctAnswers = {
+            question1: '220BC',
+            question2: '1945'
+        };
+
+        // Check if answers are correct
+        let isCorrect1 = answers.question1 === correctAnswers.question1;
+        let isCorrect2 = answers.question2 === correctAnswers.question2;
+
+        // Show message based on correctness of answers
+        if (isCorrect1 && isCorrect2) {
+            alert('Congratulations! You got the correct answers!');
+        } else if (isCorrect1 || isCorrect2) {
+            alert('Close! You got one answer correct.');
+        } else {
+            alert('Neither answer is correct. Please try again.');
+        }
+    }
+</script>
 
 </body>
 </html>
