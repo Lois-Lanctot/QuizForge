@@ -7,7 +7,6 @@ class QuizController
 {
     private $_f3; // Fat-Free instance
 
-
     /**
      * constructor for the QuizController object
      * @param $f3
@@ -28,9 +27,8 @@ class QuizController
         echo $view->render('views/home.html');
     }
 
-
     /**
-     * sets up the route for the select quiz page
+     * sets up the route for the quizzes quiz page
      * @return void
      */
     function selectTrivia()
@@ -41,9 +39,19 @@ class QuizController
 
         // Display the add choice view page
         $view = new Template();
-        echo $view->render('views/select/select_trivia.html');
+        echo $view->render('views/quizzes/select_trivia.html');
     }
 
+    /**
+     * sets up the route for taking a quiz
+     * @return void
+     */
+    function takeQuiz()
+    {
+        // Render the take_quiz.html page
+        $view = new Template();
+        echo $view->render('views/quizzes/take_quiz.html');
+    }
 
     /**
      * sets up the route for the add choice page
@@ -55,7 +63,6 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/choice.html');
     }
-
 
     /**
      * sets up the route for the add quiz title page
@@ -95,7 +102,6 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/trivia/trivia_title.html');
     }
-
 
     /**
      * sets up the route for the add quiz questions page
@@ -169,10 +175,6 @@ class QuizController
         echo $view->render('views/add/trivia/trivia_questions.html');
     }
 
-
-
-
-
     /**
      * sets up the route for the confirmation page
      * @return void
@@ -189,7 +191,4 @@ class QuizController
         $view = new Template();
         echo $view->render('views/add/confirmation.html');
     }
-
-
-
 }

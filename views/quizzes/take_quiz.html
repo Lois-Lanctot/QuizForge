@@ -1,0 +1,36 @@
+<!--
+    Authors: Noah Lanctot, Lois Lanctot
+    File: take_trivia.php
+    Description: Quiz display page that allows user to take the quiz
+-->
+
+<include href="views/header_template.html"></include>
+
+<!-- Main Content -->
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center" id="color-box">
+            <h4>Quiz Title: True or False!</h4>
+            <p>Description: This quiz is a two truths and a lie quiz. Try and figure out which of these didn't really happen.</p>
+        </div>
+    </div>
+
+    <!-- Display quiz questions and options -->
+    <div class="row mt-4">
+        <repeat group="{{ @quizData.questions }}" value="{{ @question }}">
+            <div class="col-md-8 offset-md-2 mb-4">
+                <div class="box text-center box1 p-4">
+                    <h5>{{ @question.question }}</h5>
+                    <ul>
+                        <repeat group="{{ @question.options }}" value="{{ @option }}">
+                            <li>{{ @option }}</li>
+                        </repeat>
+                    </ul>
+                </div>
+            </div>
+        </repeat>
+    </div>
+</div>
+
+</body>
+</html>

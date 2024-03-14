@@ -51,7 +51,7 @@ h1 {
     width: 30px;
 }
 
-#plus-img {
+#plus-img, #select-img {
     width: 70px;
 }
 
@@ -81,10 +81,6 @@ a {
 a:hover {
     color: #676767;
 }
-
-
-
-
 
 .question-text {
     /*top-left; top-right; bottom-right; bottom-left*/
@@ -175,6 +171,6 @@ input[type=radio]:checked {
     border-radius: 10px;
 }
 
-.link {
+.font_size {
     font-size: 20px;
  }

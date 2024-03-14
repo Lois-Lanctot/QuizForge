@@ -1,12 +1,9 @@
 <!--
     Authors: Noah Lanctot, Lois Lanctot
     File: select_trivia.html
-    Description: Choose a quiz
+    Description: Quiz selection page to choose which one to take
 -->
 <include href="views/header_template.html"></include>
-
-
-
 
 <!-- Main Content -->
 <div class="container-fluid mt-5">
@@ -17,19 +14,18 @@
         </div>
     </div>
 
-
     <div class="row mt-4">
         <!-- Display Quizzes -->
         <repeat group="{{ @titles }}" value="{{ @title }}">
-            <div class="col-md-4">
-                <div class="box text-center box1">
-                    <h1>{{ @title.title }}</h1>
-                    <p>{{ @title.description }}</p>
-                </div>
+            <div class="col-md-4 mb-4">
+                <a href="takeQuiz">
+                    <div class="box text-center box1 p-4">
+                        <h1 class="link">{{ @title.title }}</h1>
+                        <p>{{ @title.description }}</p>
+                    </div>
+                </a>
             </div>
         </repeat>
-
-
 
     </div>
 </div>

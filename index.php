@@ -31,7 +31,7 @@ $f3->route('GET|POST /addTriviaQuestions', 'QuizController->addTriviaQuestions')
 
 $f3->route('GET /selectTrivia', 'QuizController->selectTrivia');
 $f3->route('GET /addConfirmation', 'QuizController->addConfirmation');
-
+$f3->route('GET /takeQuiz', 'QuizController->takeQuiz');
 
 
 // Run Fat-Free
