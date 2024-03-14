@@ -1,6 +1,4 @@
 <?php
-// validate form data
-
 
 /**
  * validates quiz title
@@ -13,7 +11,6 @@ function validTitle($title)
     // and contains only alphanumeric characters, spaces, and common punctuation marks
     return !empty($title) && strlen($title) <= 255 && preg_match('/^[a-zA-Z0-9\s.,?!\'"-]+$/', $title);
 }
-
 
 /**
  * validates quiz description
@@ -64,5 +61,3 @@ function validQuestions($questions) {
 
     return [true, "Valid Questions", "Valid Questions"];
 }
-
-

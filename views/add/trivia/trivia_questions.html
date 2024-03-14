@@ -3,6 +3,7 @@
     File: trivia_questions.html
     Description: Create the trivia questions
 -->
+<!-- Include the header template -->
 <include href="views/header_template.html"></include>
 
 <!-- Main Content -->
@@ -13,65 +14,68 @@
     </div>
 </check>
 
-
 <section id="quizForm">
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="create">
-                <h1>Create Trivia Quiz Questions</h1><hr>
-                <form action="#" method="post">
-
-                    <!-- Quiz Title Input -->
-                    <div class="questions">
-                        <div class="question">
-                            <div class="question-title-container">
-                                <label for="questionTitle1">Question 1 Title:</label>
-                                <input class="question-title" type="text" name="question_title1" id="questionTitle1" placeholder="Enter question title">
-                            </div>
-
-                            <div class="question-container ml-3">
-                                <label for="question1Option1">Option Title:</label>
-                                <input class="question-text" type="text" name="question1_text1" id="question1Option1" placeholder="Enter option title1">
-                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio1" value="option1"></input><br>
-                            </div>
-
-                            <div class="question-container">
-                                <label for="question1Option2">Option Title:</label>
-                                <input class="question-text" type="text" name="question1_text2" id="question1Option2" placeholder="Enter option title2">
-                                <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio2" value="option2"></input><br>
-                            </div>
-
-                            <div>
-                                <button class="question-button" type="button" onclick="addOption(this)">Add Option</button>
-                            </div>
+    <form action="#" method="post">
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="create">
+                    <h1>Create Trivia Quiz Questions</h1>
+                    <hr>
+                    <!-- Initial question and options -->
+                    <div class="question">
+                        <div class="question-title-container">
+                            <label for="questionTitle1">Question 1 Title:</label>
+                            <input class="question-title" type="text" name="question_title1" id="questionTitle1" placeholder="Enter question">
+                        </div>
+                        <!-- Option 1 -->
+                        <div class="question-container ml-3">
+                            <label for="question1Option1">Option Title:</label>
+                            <input class="question-text" type="text" name="question1_text1" id="question1Option1" placeholder="Enter option 1">
+                            <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio1" value="option1">
+                        </div>
+                        <!-- Option 2 -->
+                        <div class="question-container">
+                            <label for="question1Option2">Option Title:</label>
+                            <input class="question-text" type="text" name="question1_text2" id="question1Option2" placeholder="Enter option 2">
+                            <input class="question-radio" type="radio" name="question1_radio1" id="question1Radio2" value="option2">
+                        </div>
+                        <!-- Add Option Button -->
+                        <div>
+                            <button class="question-button" type="button" onclick="addOption(this)">Add Option</button>
                         </div>
                     </div>
-
-
-
-                    <button class="question-button question-float-left" type="button" onclick="addQuestion()">Add Question</button>
-                    <button class="question-button question-float-right">Finish Quiz</button>
-                </form>
+                </div>
+            </div>
+            <!-- Add Question and Finish Quiz Buttons -->
+            <div class="col-md-4">
+                <div class="create text-center">
+                    <div class="question">
+                        <button class="question-button" type="button" onclick="addQuestion()">Add Question</button>
+                        <button class="question-button" type="submit">Finish Quiz</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
+    <!-- JavaScript for quiz functionality -->
     <script>
         let questionCounter = 1;
         let groupCounter = 1;
 
         function addQuestion() {
-            // increment counters
+            // Increment counters
             questionCounter++;
             groupCounter++;
 
-            // add new div element for the question
+            // Add new div element for the question
             let newQuestionDiv = document.createElement('div');
             newQuestionDiv.className = 'question';
 
-            // copy the question title container
+            // Copy the question title container
             let questionTitleContainer = document.querySelector('.question-title-container').cloneNode(true);
 
-            // update the id and label
+            // Update the ID and label
             let questionTitleInput = questionTitleContainer.querySelector('.question-title');
             let questionTitleLabel = questionTitleContainer.querySelector('label');
 
@@ -80,57 +84,63 @@
             questionTitleLabel.innerText = 'Question ' + questionCounter + ' Title:';
             questionTitleInput.name = 'question_title' + questionCounter;
 
-            // clear the value of question title
+            // Clear the value of question title
             questionTitleInput.value = '';
 
             newQuestionDiv.appendChild(questionTitleContainer);
 
-            // create a new option 1
-            let optionContainer1 = document.createElement('div');
-            optionContainer1.className = 'question-container ml-3';
-            optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
-                '<input class="question-text" type="text" name="question' + questionCounter + '_text1" id="question' + questionCounter + 'Option1" placeholder="Enter option title1">' +
-                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio1" value="option' + (groupCounter - 1) + '">';
-
-            newQuestionDiv.appendChild(optionContainer1);
-
-            // create a new option 2
-            let optionContainer2 = document.createElement('div');
-            optionContainer2.className = 'question-container';
-            optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
-                '<input class="question-text" type="text" name="question' + questionCounter + '_text2" id="question' + questionCounter + 'Option2" placeholder="Enter option title2">' +
-                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio2" value="option' + groupCounter + '">';
-
-            newQuestionDiv.appendChild(optionContainer2);
+            // Create initial option containers for the new question
+            addOptionContainers(newQuestionDiv);
 
             // div for the button
             let buttonContainer = document.createElement('div');
             buttonContainer.innerHTML = '<button class="question-button" type="button" onclick="addOption(this)">Add Option</button>';
             newQuestionDiv.appendChild(buttonContainer);
 
-            // find the "questions" div and put the new question to the end
-            let questionsContainer = document.querySelector('.questions');
+
+            // Find the "questions" div and append the new question at the end
+            let questionsContainer = document.querySelector('.create');
             questionsContainer.appendChild(newQuestionDiv);
         }
 
+        // Function to create initial option containers for a new question
+        function addOptionContainers(questionDiv) {
+            let optionContainer1 = document.createElement('div');
+            optionContainer1.className = 'question-container ml-3';
+            optionContainer1.innerHTML = '<label for="question' + questionCounter + 'Option1">Option Title:</label>' +
+                '<input class="question-text" type="text" name="question' + questionCounter + '_text1" id="question' + questionCounter + 'Option1" placeholder="Enter option 1">' +
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio1" value="option' + (groupCounter - 1) + '">';
+
+            let optionContainer2 = document.createElement('div');
+            optionContainer2.className = 'question-container';
+            optionContainer2.innerHTML = '<label for="question' + questionCounter + 'Option2">Option Title:</label>' +
+                '<input class="question-text" type="text" name="question' + questionCounter + '_text2" id="question' + questionCounter + 'Option2" placeholder="Enter option 2">' +
+                '<input class="question-radio" type="radio" name="question' + questionCounter + '_radio' + questionCounter + '" id="question' + questionCounter + 'Radio2" value="option' + groupCounter + '">';
+
+            // Append option containers to the question div
+            questionDiv.appendChild(optionContainer1);
+            questionDiv.appendChild(optionContainer2);
+        }
+
+        // Function to add an option to a question
         function addOption(button) {
             let currentQuestion = button.closest('.question');
 
             if (currentQuestion) {
-                // determine the index for the new option
+                // Determine the index for the new option
                 let existingOptions = currentQuestion.querySelectorAll('.question-container');
                 let newIndex = existingOptions.length + 1;
 
                 let newOptionContainer = document.createElement('div');
                 newOptionContainer.className = 'question-container';
 
-                // get the question number from the current question title
+                // Get the question number from the current question title
                 let questionTitleContainer = currentQuestion.querySelector('.question-title-container');
                 let questionTitleLabel = questionTitleContainer ? questionTitleContainer.querySelector('label') : null;
                 let questionNumber = questionTitleLabel ? questionTitleLabel.getAttribute('for').match(/\d+/) : '';
                 questionNumber = questionNumber ? questionNumber[0] : '';
 
-                // new input fields for the option
+                // New input fields for the option
                 let newOptionLabel = document.createElement('label');
                 newOptionLabel.setAttribute('for', `question${questionNumber}Option${newIndex}`);
                 newOptionLabel.textContent = 'Option Title:';
@@ -140,7 +150,7 @@
                 newOptionInput.type = 'text';
                 newOptionInput.name = `question${questionNumber}_text${newIndex}`;
                 newOptionInput.id = `question${questionNumber}Option${newIndex}`;
-                newOptionInput.placeholder = `Enter option title${newIndex}`;
+                newOptionInput.placeholder = `Enter option ${newIndex}`;
 
                 let newOptionRadio = document.createElement('input');
                 newOptionRadio.className = 'question-radio';
@@ -149,19 +159,18 @@
                 newOptionRadio.id = `question${questionNumber}Radio${newIndex}`;
                 newOptionRadio.value = `option${newIndex}`;
 
-                // add the new input fields to the container
+                // Add the new input fields to the container
                 newOptionContainer.appendChild(newOptionLabel);
                 newOptionContainer.appendChild(newOptionInput);
                 newOptionContainer.appendChild(newOptionRadio);
 
-                // insert the new option before the button
+                // Insert the new option before the button
                 currentQuestion.insertBefore(newOptionContainer, button.parentNode);
             } else {
                 console.error('Error: Unable to find the parent question container.');
             }
         }
     </script>
-
 
 </section>
 </body>
