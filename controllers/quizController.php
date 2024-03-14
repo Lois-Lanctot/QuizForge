@@ -2,6 +2,8 @@
 
 /**
  * Controller object to define routes
+ * @author Lois Lanctot, Noah Lanctot
+ * @version 1.0
  */
 class QuizController
 {

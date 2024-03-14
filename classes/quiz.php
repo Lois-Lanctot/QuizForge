@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * A class for the Quiz Object
+ * @author Lois Lanctot, Noah Lanctot
+ * @version 1.0
+ */
 class Quiz
 {
 

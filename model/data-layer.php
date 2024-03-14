@@ -6,6 +6,8 @@ require ($_SERVER['DOCUMENT_ROOT'].'/../config.php');
 
 /**
  * Able to pull and add data from/to the database
+ * @author Lois Lanctot, Noah Lanctot
+ * @version 1.0
  */
 class QuizDataLayer
 {
